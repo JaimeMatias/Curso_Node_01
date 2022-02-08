@@ -1,0 +1,13 @@
+Función de Flecha:
+Es lo mismos que la función normal pero descripta de otra manera:
+
+Funtion Saludar(argumentos){
+    acciones función
+}
+
+lo mismo a esto sería:
+const Saludar=(argumentos) =>{
+    acciones funciones
+}
+
+Ambas son lo mismo
