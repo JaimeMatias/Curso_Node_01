@@ -1,3 +1,150 @@
+VARIABLES
+La forma de definir las variables es con la palabra reservada Let o con la palabra reservada var
+    let f=90;
+No se puede definir 2 veces la misma variable, eso da error
+    let nombre='Matias'
+    let nombre='Jaime'
+    Esto genera error
+ NO puede iniciarse el nombre de una variable con un NUMERO
+NO puede contener caracteres especiales( salvo _ y $)
+ Usar CamelCase: NombreCompleto
+ LowerCamelCasas: nombreCompleto
+
+Hay una diferencia entre la palabra reservada Let y var:
+Var tiene un alcance global(actualizar una vez el valor de la variable genera un impacto en toda la aplicacion)
+Let tiene un alcance local(actualizar el valor de la variable va a generar un impacto dependiendo del alcance de la misma)
+
+Se recomienda evitar el uso de Var, en vez de eso, se recomienda Let
+
+CONSTANTES
+La forma de definir las constantes es con la palabra reservada const
+    const nombre='Matias'
+
+TIPOS
+Number:
+    Let salario=1500;
+    Para incrementar en 1 unidad una variable o disminuir en una unidad 1 variable se utiliza la sintaxis= ++  o --
+    var++; incrementa en 1
+ Strings:
+    Let nombre= "Fernando Herrera",
+     Para concatenar Strings se utiliza el signo +
+ Booleans:
+    Let activo=true; (Que las variables boleanas sean definidas en positivo)
+
+
+Operacion con String
+Para concatenerar strings se utiliza el singo +
+    Nombre1='Matias' Apellido='Jaime'
+    Salida= Nombre1+Apellido
+ Si se suma un string y un booleano, el booleano cambia su valor por un string
+    let activo='false';falso=false;
+    salida= activo+falso='falsefalse'
+
+Operacion con Booleanos
+Cuan se realiza la suma de variables booleanas, si hay qu tenga valor true, el resultado es 1(independiente de cuantos true existan), si no hay ninguno devuelve 0
+    var1=true var2=false var3=true
+    salida=var1+var2+var3=1
+
+Operacion con Areglos
+Let arreglo=[var1,var2,var3]
+Comienza en el indice 0
+
+
+Operaciones con Conjuntos
+Dado el arreglo de conjunto de datos como el siguiente:
+
+Datos=[
+      {
+        id:1,
+        nombre:'Matias'
+    },
+    {
+        id:2,
+    },
+]
+
+Datos[1].nombre me va a dar Matias
+Datos[2].nombre me va a dar ERROR
+Salvo que lo escriba de la siguiente manera:
+Datos[2]?.nombre el ? hace que Javascript intente realizar la operación, y se detiene si da error, Esto sirve para que el programa no se rompa cuando falta algun dato
+
+ -----------------------------------------------------------------------------------------------
+Estructura de Control:
+Formato de estructura del condicional
+    if (condition) {
+        accion1
+    } else {
+        accion2
+    }
+
+Tambien existe un operador ternario, siguiendo con el ejemplo anterior:
+(condicion)
+    ?(accion1)
+    :(accion2)
+Solo funciona cuando acción1 y accion2 son 1 sola acción
+
+ Existe el elif:
+     else if
+
+
+
+Condicional Switch
+switch (key) {
+    case value:
+        
+       break; El break es fundamental para, ya que le indica al flujo que deje de analizar lo que está abajo y termine el condicional
+
+    default: El default se utiliza para cualquier valor fuera de los aceptados
+        break;
+}
+
+Ciclos de Control
+while (condition) {
+    
+}
+
+FOR
+for (let i = 0;i<= 10;i++) {
+
+}
+
+----------------------------------------------
+FUNCIONES
+    function saludar(arg1,arg2,){ Los argumentos se separan por coma
+
+    return algo   Se utiliza la palabra reservada return para devolver los valores
+    }
+
+
+-----------------------------------------------------------------
+OBJETOS
+ lo que define a un objeto son los corchetes {}
+ si se define una variable con corchetes, significa que es un objeto
+let carro={
+    atributos
+        carro:'blanco', No utiliza el = para realizar la asignación, sino los 2 puntos:
+        
+}
+
+ CLASES
+ La sintaxis para crear clases es con la palabra reservada class
+    class Galleta{
+        Constructor(variables){
+            this.var1=variable1;
+            this.var2=variable2;
+        }
+    }
+
+ La forma de instanciar una clase es con la palabra resrvada 
+ let galleta1= new Galleta()
+
+
+COMILLA INVERTIDA
+La comilla invertida me permite en la cadena añadir variables
+${variable}no es transformado a una cadena, sino que nos devuelve el valor de la varialbe
+ `Esta es una  cadela ${variable}`
+
+
 Función de Flecha:
 Es lo mismos que la función normal pero descripta de otra manera:
 
@@ -7,7 +154,86 @@ Funtion Saludar(argumentos){
 
 lo mismo a esto sería:
 const Saludar=(argumentos) =>{
-    acciones funciones
+    return `Saludo`
 }
 
 Ambas son lo mismo
+
+Cuando la función de flecha tiene en el cuerpo 1 solo renglon, y ese renglo tiene un return, se puede cambar la sintaxis de la función, quedando de la siguiente manera:
+const Saludar =(argumentos)=> `Saludo`
+Se eliminan los {} y la palabra return
+
+---------------------------------------------------------------------------------------------
+PROMESAS
+Dada cualquier  función con callback, se puede utilizar las promesas en su lugar,
+La sintaxis inicial sería:
+const Función=(id,callback)=>{
+    const Salida= BaseDatos.find(id)
+    callback(Salida)
+}
+
+Esta función recibe 2 parametros de entrada, y cuando se ejecute la función, va a ser necesario que se defina el callback
+Para evitar cambiar esto, se usan las promesas.
+Quedando de la siguiente manera:
+La sintaxis inicial sería:
+const Función=(id)=>{
+    const Salida= BaseDatos.find(id)
+    const Promesa=new Promise((resolve,reject)=>{
+        if(Salida){
+            resolve(Salida);
+        }else{
+            reject(`No se encontró el dato`)
+        }
+}
+
+La promesas utilizan por lo general 2 valores, un Resolve(cuando todo sale segun lo planeado) y un Reject(Cuando segenera una excepción)
+
+Cuando se llama a la función, hay que escribirlo de la siguiente manera, con las palabras reservadas .then(flujo normal de ejecución) y .catch( Flujo de ejecucioncon excepción)
+Función(id)
+    .then(var=>argumentos)
+    .catch(var=>argumentos)
+
+Se pueden anidar las promesas 
+Función1(id)
+    .then(varFun1=>Función2(id))
+        .then(varFun2=>argumentos)
+    .catch(var=>argumentos)
+
+Pero solo es necesario 1 Catch, ya que ese catch va a tomar el error que se genere de cualquiera de las funciones
+
+Agregar el termino async a una función, hace que se transforme en una promesa, por lo tanto cuando instanciemos la función, debemos llamar a los metodos then y catch
+
+const funcion=async()=>{
+    codigo
+    (condicion)
+    ?resolve()
+    :reject()
+}
+
+funcion()
+    .then()
+    .catch()
+
+Las palabras Reservadas await y Throw tienen mucha utilidad en este tipo de funciones,
+El await, permite que asignemos a una variable el resultado de la ejecución de una función que tiene callback
+El Thrown es lo mismo que el reject pero para funciones asincronas, ya que el reject no funciona en funciones asincronas
+
+const getInfoUsuario2=async(id)=>{
+    try {
+        const empleado= await getEmpleado(id)
+        return `El salario del empleado: ${empleado} es ${salario}`    
+    } catch (error) {
+        throw error
+
+    }
+    
+}
+
+----------------------------------------------------------------------------------------------
+Desestructuración
+Sirve para convertir en variables, los valores de los atributos de un objeto
+const {atributo1,atributo2,atributon, met1,net2}=objeto
+De esa manera podemos sacar del objeto los atributos/metodos que querramos,
+Los metodos no simpre funcionarian como queremos
+
+
