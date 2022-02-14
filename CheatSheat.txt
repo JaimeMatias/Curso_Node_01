@@ -115,7 +115,8 @@ FUNCIONES
     return algo   Se utiliza la palabra reservada return para devolver los valores
     }
 
-
+Las funciones no pueden modificar el valor de los argumentos que reciben,
+Si el arg1=4, dentro del scope de la función puedo modificar el valor, pero afuera continuará teniendo el mismo valor
 -----------------------------------------------------------------
 OBJETOS
  lo que define a un objeto son los corchetes {}
@@ -184,9 +185,11 @@ const Función=(id)=>{
         }else{
             reject(`No se encontró el dato`)
         }
-}
+})
+return Promesa
 
-La promesas utilizan por lo general 2 valores, un Resolve(cuando todo sale segun lo planeado) y un Reject(Cuando segenera una excepción)
+
+La promesas utilizan por lo general 2 valores, un Resolve(cuando todo sale segun lo planeado) y un Reject(Cuando segenera una excepción) y finalmente se devuelve la promesa
 
 Cuando se llama a la función, hay que escribirlo de la siguiente manera, con las palabras reservadas .then(flujo normal de ejecución) y .catch( Flujo de ejecucioncon excepción)
 Función(id)
@@ -205,9 +208,9 @@ Agregar el termino async a una función, hace que se transforme en una promesa, 
 
 const funcion=async()=>{
     codigo
-    (condicion)
-    ?resolve()
-    :reject()
+    try{(condicion)
+    }
+    catch(error){}
 }
 
 funcion()
@@ -237,3 +240,22 @@ De esa manera podemos sacar del objeto los atributos/metodos que querramos,
 Los metodos no simpre funcionarian como queremos
 
 
+-------------------------------------------------------------------
+Exportar OBJETOS
+Para poder exportar objeto entre distintos archivos se utilizan las palabras reservadas Export y Requiere
+Dada la funcion
+const funcion =()=>{
+
+}
+Luego de haberla definido, se utiliza la palabra:
+module.exports ={
+funcion
+}
+
+Y en el programa en el que queremos utilizar la función la llamamos de la siguiente manera:
+const {funcion}=require('.././')
+
+----------------------------------------------------------------------------------------------
+RUTAS DIRECTORIOS
+La barra que se utiliza para indicar la ruta  en la que se va a escribir un archivo, es el parentesis simple / ,  no el parentesis Invertido \
+`./salida/Tabla4.txt`
