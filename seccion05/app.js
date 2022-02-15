@@ -1,13 +1,19 @@
 require('colors');
 
-const {mostrar_menu,pausa} =require('../seccion05/helper/mensajes')
-
+const {inquierer_menu,pausa}=require('../seccion05/helper/inquirer');
 console.clear();
 const main= async() =>{
 
     console.log('Hola Mundo');
-    mostrar_menu();
-    pausa();
+    let opt='';
+    do {
+        opt= await inquierer_menu();    
+        console.log({opt});
+        console.log(opt['option']);
+
+        if (opt['option']!== '0') await pausa();
+    }while (opt['option']!== '0');
+   
 }
 
-main();
+main()

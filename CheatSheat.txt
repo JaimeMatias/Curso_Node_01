@@ -179,7 +179,7 @@ Quedando de la siguiente manera:
 La sintaxis inicial sería:
 const Función=(id)=>{
     const Salida= BaseDatos.find(id)
-    const Promesa=new Promise((resolve,reject)=>{
+    const Promesa=new Promise((resolve,rejects)=>{
         if(Salida){
             resolve(Salida);
         }else{
