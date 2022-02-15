@@ -255,7 +255,26 @@ funcion
 Y en el programa en el que queremos utilizar la función la llamamos de la siguiente manera:
 const {funcion}=require('.././')
 
+Lo recomendable es que primer o vayan las exportaciones de terceros y luegos las importaciones creadas por uno mismo
+
+
 ----------------------------------------------------------------------------------------------
 RUTAS DIRECTORIOS
 La barra que se utiliza para indicar la ruta  en la que se va a escribir un archivo, es el parentesis simple / ,  no el parentesis Invertido \
 `./salida/Tabla4.txt`
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+SALIDA POR PANTALLA
+la impresión por pantalla se realiza mediante el comando console.log, pero lo que va a salir en la pantalla va a depender de los caracteres especiales que utilicemos adentro
+Si no se utilizan los caracteres especiales {}, lo que se muestra por pantalla es el valor de uno de los atributos de un objeto
+Si se utilizan los caracteres especaiels {}, entonces lo que se muestra por pantalla es el objeto
+Dado el arreglo:
+let Direcciones={    1:'Norte',    2:'Sur',    3:'Este',    5:'oeste'}
+console.log(Direcciones[1])===== Norte
+console.log({Direcciones}====Direcciones={    1:'Norte',    2:'Sur',    3:'Este',    5:'oeste'}
+
+Su uso va a depender de que es lo que queramos mostrar
