@@ -1,6 +1,8 @@
 require('colors');
 
 const {inquierer_menu,pausa}=require('../seccion05/helper/inquirer');
+const Tarea=require('./models/tarea');
+const Tareas=require('./models/tareas');
 console.clear();
 const main= async() =>{
 
@@ -13,7 +15,11 @@ const main= async() =>{
 
         if (opt['option']!== '0') await pausa();
     }while (opt['option']!== '0');
-   
+   const tarea= new Tarea('Comprar Comida');
+   console.log(tarea);
+   const tareas= new Tareas();
+   tareas._listado[tarea.id]=tarea;
+   console.log(tareas);
 }
 
 main()
