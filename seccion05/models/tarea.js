@@ -8,6 +8,7 @@ class Tarea{
     this.id=uuidv4();
     this.desc=desc;
      }
+    
 
 };
 

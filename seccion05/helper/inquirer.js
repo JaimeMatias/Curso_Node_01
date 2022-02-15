@@ -42,14 +42,7 @@ const menu_options=[
     }
 ];
 
-const menu_pausa=[{
-    type:'input',
-    name:'pausa',
-    message:`\nPresione ${'ENTER'.green} para continuar: \n`,
-}        
 
-    
-];
 
 const inquierer_menu =async() =>{
     console.clear()
@@ -58,18 +51,39 @@ const inquierer_menu =async() =>{
     console.log('=========================\n'.green);
 
     const opt =await inquirer.prompt(menu_options);
-    return opt
+    return opt.option
 };
 
 
 const pausa =async() =>{
+    const menu_pausa=[{
+        type:'input',
+        name:'pausa',
+        message:`\nPresione ${'ENTER'.green} para continuar: \n`,
+    }            
+    ];
     const opt=await inquirer.prompt(menu_pausa);
     return opt
 }
 
+const leer_imput=async(message)=>{
+    const question=[{
+        type:'input',
+        name:'desc',
+        message,
+        validate(value){
+            if (value.length===0){
+                return 'Por favor ingrese un valor';
+            }
+            return true;
+        }}];
+    const respuesta= await inquirer.prompt(question);
+    return respuesta.desc;
 
+}
 
 module.exports={
     inquierer_menu,
     pausa,
+    leer_imput,
 }
