@@ -69,7 +69,14 @@ class Tareas {
             
             }
         )
-    }
+    };
+
+    borrar_tareas(id=''){
+        if (this._listado[id]){
+            delete this._listado[id];
+        };
+
+    };
 
     get listado_arr() {
         const salida = [];

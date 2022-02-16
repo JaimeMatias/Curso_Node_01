@@ -91,8 +91,30 @@ const leer_imput = async (message) => {
 
 }
 
+const listado_tarea_borrar= async (tareas=[])=>{
+    const choices=tareas.map((tarea,i)=>{
+        return{
+            value:tarea.id,
+            name:`id: ${i+1}: desc: ${ tarea.desc}`,
+        }
+    });
+    console.log(choices);
+    const question=[{
+        type:'list',
+        name:'id',
+        message:'Borrar',
+        choices: choices,
+    }];
+    const {id} = await inquirer.prompt(question);
+    console.log(id);
+    return id;
+
+}
+
+
 module.exports = {
     inquierer_menu,
     pausa,
     leer_imput,
+    listado_tarea_borrar,
 }

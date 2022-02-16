@@ -1,7 +1,7 @@
 require('colors');
 
 const { guardar_archivo, leer_archivo } = require('../seccion05/helper/guardar_archivo')
-const { inquierer_menu, pausa, leer_imput } = require('../seccion05/helper/inquirer');
+const { inquierer_menu, pausa, leer_imput, listado_tarea_borrar } = require('../seccion05/helper/inquirer');
 const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
 console.clear();
@@ -33,6 +33,13 @@ const main = async () => {
                 break;
             case '4':
                 tareas.listar_pendientes_completadas(false);
+                break;
+
+            case '6':
+                //console.log(tareas.listado_arr);
+                const id=await listado_tarea_borrar(tareas.listado_arr);
+                console.log({id});
+                tareas.borrar_tareas(id);
                 break;
         }
 
