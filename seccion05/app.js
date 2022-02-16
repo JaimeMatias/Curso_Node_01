@@ -1,14 +1,20 @@
 require('colors');
 
+const {guardar_archivo,leer_archivo}=require('../seccion05/helper/guardar_archivo')
 const { inquierer_menu, pausa, leer_imput } = require('../seccion05/helper/inquirer');
 const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
 console.clear();
 const main = async () => {
 
-
+   
     let opt = '';
     const tareas = new Tareas();
+    const tareasdb=leer_archivo();
+   
+  
+    tareas.cargar_tarea(tareasdb);
+   
     do {
         opt = await inquierer_menu();
 
@@ -23,6 +29,9 @@ const main = async () => {
                 console.log(tareas.listado_arr);
                 break;
         }
+
+        guardar_archivo(tareas.listado_arr);
+        
         if (opt !== '0') await pausa();
     } while (opt !== '0');
 }

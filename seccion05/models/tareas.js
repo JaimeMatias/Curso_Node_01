@@ -11,6 +11,16 @@ class Tareas {
         this._listado[tarea.id] = tarea;
     }
 
+    cargar_tarea(datos){
+        datos.forEach( element =>{
+
+            this._listado[element.id]=element;
+          
+        }
+
+        )
+    };
+
     get listado_arr() { 
         const salida=[];
         Object.keys(this._listado).forEach( 
