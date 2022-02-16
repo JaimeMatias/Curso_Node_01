@@ -99,6 +99,12 @@ const listado_tarea_borrar= async (tareas=[])=>{
         }
     });
     console.log(choices);
+    choices.unshift(
+        {
+            value:'0',
+            name:'0'.green + ' CANCELAR'
+        }
+    )
     const question=[{
         type:'list',
         name:'id',
@@ -107,8 +113,19 @@ const listado_tarea_borrar= async (tareas=[])=>{
     }];
     const {id} = await inquirer.prompt(question);
     console.log(id);
+   
     return id;
-
+};
+const confirmar =async(message)=>{
+    const question=[{
+        type: 'confirm',
+        name: 'confirmacion',
+        message,
+        
+      }]
+      const {confirmacion}=await inquirer.prompt(question);
+      return confirmacion
+      
 }
 
 
@@ -117,4 +134,5 @@ module.exports = {
     pausa,
     leer_imput,
     listado_tarea_borrar,
+    confirmar,
 }
