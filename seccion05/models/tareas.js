@@ -41,6 +41,36 @@ class Tareas {
         )
     };
 
+    listar_pendientes_completadas(completada=true){
+        let cont=1;
+        console.log();
+       this.listado_arr.forEach(
+            element =>{
+                let salida = ''
+                const{desc,completado_en}=element;
+                
+                if (completada){
+                    if (completado_en){
+                        salida = `${cont.toString().green}. ${desc} :: ${completado_en}.`;
+                        cont++;
+                        console.log(salida);
+                    }
+                    
+                }else{
+                    if (!completado_en){
+                        salida = `${cont.toString().green}. ${desc} :: ${'Pendiente'.red}.`;
+                        cont++;
+                        console.log(salida);
+                    }
+                }
+
+
+                
+            
+            }
+        )
+    }
+
     get listado_arr() {
         const salida = [];
         Object.keys(this._listado).forEach(
