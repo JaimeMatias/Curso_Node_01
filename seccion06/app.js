@@ -12,7 +12,7 @@ const main=async() => {
             case 1:
                 console.log('Selecionó la opción 1');
                 const ciudad_buscada= await leer_imput('Por favor ingrese una ciudad');
-                busqueda.ciudad(ciudad_buscada);
+                await busqueda.ciudad(ciudad_buscada);
                 console.log(`Información de la ciudad:`.green);
                 console.log(`Ciudad: `);
                 console.log(`Lat:`);
