@@ -3,3 +3,5 @@
 /seccion04/salida/*.txt
 
 /seccion05/node_modules
+/seccion05/db/casos.*
+/seccion06/node_modules
