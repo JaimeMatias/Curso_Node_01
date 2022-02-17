@@ -68,6 +68,7 @@ Datos[2].nombre me va a dar ERROR
 Salvo que lo escriba de la siguiente manera:
 Datos[2]?.nombre el ? hace que Javascript intente realizar la operación, y se detiene si da error, Esto sirve para que el programa no se rompa cuando falta algun dato
 
+
  -----------------------------------------------------------------------------------------------
 Estructura de Control:
 Formato de estructura del condicional

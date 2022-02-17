@@ -128,6 +128,29 @@ const confirmar =async(message)=>{
       
 }
 
+const mostrar_listado_cheklist= async (tareas=[])=>{
+    const choices=tareas.map((tarea,i)=>{
+        return{
+            value:tarea.id,
+            name:`id: ${i+1}:${ tarea.desc}`,
+            checked:(tarea.completado_en) ?true:false
+        }
+    });
+    console.log(choices);
+
+    const question=[{
+        type:'checkbox',
+        name:'id',
+        message:'Completar',
+        choices
+    }];
+    const {id} = await inquirer.prompt(question);
+    console.log(id);
+   
+    return id;
+};
+
+
 
 module.exports = {
     inquierer_menu,
@@ -135,4 +158,5 @@ module.exports = {
     leer_imput,
     listado_tarea_borrar,
     confirmar,
+    mostrar_listado_cheklist,
 }

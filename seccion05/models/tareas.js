@@ -87,6 +87,24 @@ class Tareas {
         )
         return salida
     }
-};
+    
+    toggle_completadas(arreglo_id={}){
+        arreglo_id.forEach(element => {
+            const tarea=this._listado[element];
+            if(!tarea.completado_en){
+                
+                tarea.completado_en=new Date().toISOString();
+            }
+            
+        });
+this.listado_arr.forEach(tarea =>{
+ if(!arreglo_id.includes(tarea.id)){
+    this._listado[tarea.id].completado_en=null;
+ };
+});
 
+    }
+        
+};
+    
 module.exports = Tareas;
