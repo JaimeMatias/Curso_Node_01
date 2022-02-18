@@ -24,14 +24,17 @@ const main = async () => {
 
                 const lugarSel = lugares.find(f => f.id === id_elegido);
                 const {id,nombre,Lng,Lat}=lugarSel;
-                console.log(lugarSel);
+                //console.log(lugarSel);
                 console.log(`\nInformación de la ciudad:\n`.green);
-                console.log(`Ciudad: ${nombre}`);
-                console.log(`Lat: ${Lat}`);
-                console.log(`Lng: ${Lng}`);
-                console.log(`Temperatura:${''}`);
-                console.log(`Mínima:${''}`);
-                console.log(`Maxima:${''}`);
+                console.log(`Ciudad: ${nombre.green}`);
+                console.log(`Lat: ${Lat.toString().green}`);
+                console.log(`Lng: ${Lng.toString().green}`);
+                const temperatura= await busqueda.clima(Lat,Lng);
+                const {Desc,Temp,Temp_min,Temp_max}=temperatura;
+                console.log(`Clima:${Desc.green}`);
+                console.log(`Temperatura:${Temp.toString().green}`);
+                console.log(`Mínima:${Temp_min.toString().green}`);
+                console.log(`Maxima:${Temp_max.toString().green}`);
                 esperar = true;
                 break;
             case 2:

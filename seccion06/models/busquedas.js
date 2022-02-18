@@ -31,10 +31,41 @@ class Busquedas {
             }))
             
         } catch (error) {
+
             return [];
         }
 
-        return [];
+        
+    }
+
+    get params_openweather(){
+        return {
+            appid:process.env.OPENWHEATHER_KEY,
+            'units':'metric'
+
+        }
+    }
+
+    async clima(lat=0,lgn=0){
+        try {
+            const solicitud=axios.create({
+                baseURL: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lgn}`,
+                params:this.params_openweather
+            });
+            const resp= await solicitud.get();
+            const datos_nubes=resp.data.weather;
+            const datos_clima=resp.data.main;
+            return {
+                Desc:datos_nubes[0].description,
+                Temp:datos_clima.temp,
+                Temp_min:datos_clima.temp_min,
+                Temp_max:datos_clima.temp_max,
+            }
+
+        } catch (error) {
+            console.log(`Genera error la consulta Clima ${error}`.red )
+            return []
+        }
     }
 }
 

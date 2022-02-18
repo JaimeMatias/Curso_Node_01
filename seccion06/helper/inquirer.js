@@ -115,7 +115,7 @@ const mostrar_listado_cheklist = async (tareas = []) => {
             checked: (tarea.completado_en) ? true : false
         }
     });
-    console.log(choices);
+    
 
     const question = [{
         type: 'checkbox',
@@ -124,7 +124,7 @@ const mostrar_listado_cheklist = async (tareas = []) => {
         choices
     }];
     const { id } = await inquirer.prompt(question);
-    console.log(id);
+    
 
     return id;
 };

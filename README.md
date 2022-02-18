@@ -26,6 +26,8 @@ Las tecnologias a utilizaren este proyecto son:
   
 ## Secciones
 ***
+### Seccion 01
+Introducción del curso  
 ### Seccion 02
 ### Seccion 03
 ### Seccion 04
