@@ -136,9 +136,13 @@ let carro={
             this.var2=variable2;
         }
     }
+    get Parametros(){}
 
  La forma de instanciar una clase es con la palabra resrvada 
  let galleta1= new Galleta()
+Los metodos getter, no utilizan parentesis cuando se los instancia, para la clase anterior sería:
+Galleta.Paramentros;
+
 
 
 COMILLA INVERTIDA

@@ -69,62 +69,63 @@ const leer_imput = async (message) => {
 
 }
 
-const listado_tarea_borrar= async (tareas=[])=>{
-    const choices=tareas.map((tarea,i)=>{
-        return{
-            value:tarea.id,
-            name:`id: ${i+1}: desc: ${ tarea.desc}`,
+const listado_lugares = async (lugares = []) => {
+    const choices = lugares.map((lugar, i) => {
+        return {
+            value: lugar.id,  // The value to store of the answer              
+            name: `id: ${(i + 1).toString().green}. ${lugar.nombre.green}`,
         }
     });
-    console.log(choices);
+
     choices.unshift(
         {
-            value:'0',
-            name:'0'.green + ' CANCELAR'
+            value: '0',
+            name: '0'.green + ' CANCELAR'
         }
     )
-    const question=[{
-        type:'list',
-        name:'id',
-        message:'Borrar',
-        choices: choices,
+    const question = [{
+        type: 'list',
+        name: 'id', //The name to use when storing the answer in the answers 
+        message: 'Seleccione',
+        choices,
     }];
+    console.log(question);
     const {id} = await inquirer.prompt(question);
-    console.log(id);
-   
     return id;
 };
-const confirmar =async(message)=>{
-    const question=[{
+
+
+const confirmar = async (message) => {
+    const question = [{
         type: 'confirm',
         name: 'confirmacion',
         message,
-        
-      }]
-      const {confirmacion}=await inquirer.prompt(question);
-      return confirmacion
-      
+
+    }]
+    const { confirmacion } = await inquirer.prompt(question);
+    return confirmacion
+
 }
 
-const mostrar_listado_cheklist= async (tareas=[])=>{
-    const choices=tareas.map((tarea,i)=>{
-        return{
-            value:tarea.id,
-            name:`id: ${i+1}:${ tarea.desc}`,
-            checked:(tarea.completado_en) ?true:false
+const mostrar_listado_cheklist = async (tareas = []) => {
+    const choices = tareas.map((tarea, i) => {
+        return {
+            value: tarea.id,
+            name: `id: ${i + 1}:${tarea.desc}`,
+            checked: (tarea.completado_en) ? true : false
         }
     });
     console.log(choices);
 
-    const question=[{
-        type:'checkbox',
-        name:'id',
-        message:'Completar',
+    const question = [{
+        type: 'checkbox',
+        name: 'id',
+        message: 'Completar',
         choices
     }];
-    const {id} = await inquirer.prompt(question);
+    const { id } = await inquirer.prompt(question);
     console.log(id);
-   
+
     return id;
 };
 
@@ -134,7 +135,7 @@ module.exports = {
     inquierer_menu,
     pausa,
     leer_imput,
-    listado_tarea_borrar,
+    listado_lugares,
     confirmar,
     mostrar_listado_cheklist,
 }

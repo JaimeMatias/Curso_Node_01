@@ -31,6 +31,13 @@ Las tecnologias a utilizaren este proyecto son:
 ### Seccion 04
 ### Seccion 05
 ### Seccion 06
+Aplicación CLI que obtiene como datos el nombre de una ciudad, despliega distintas alternativas que generan una coincidencia con la busqueda, para luego desplegar la
+informacion de dicha ciudad por pantalla.  
+La aplicación almacena de manera persistente las ultimas 5 busquedas realizadas.  
+Las APIs utilizadas fueron las siguientes:  
+[MAPBOX](https://www.mapbox.com/): Para obtener información de la ciudad.  
+[OPENWEATHER](https://openweathermap.org/): Para obtener información del clima.  
+
   
   
 ## Certificado Finalización Curso
