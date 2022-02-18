@@ -1,7 +1,11 @@
 const axios = require('axios');
+const PasswordPrompt = require('inquirer/lib/prompts/password');
 
 class Busquedas {
+    historial=[];
+
     constructor() {
+        
     }
 
     get params_mapbox() {
@@ -41,10 +45,11 @@ class Busquedas {
     get params_openweather(){
         return {
             appid:process.env.OPENWHEATHER_KEY,
-            'units':'metric'
+            'units':'metric',
+            'lang':'es',
 
         }
-    }
+    };
 
     async clima(lat=0,lgn=0){
         try {
@@ -66,6 +71,28 @@ class Busquedas {
             console.log(`Genera error la consulta Clima ${error}`.red )
             return []
         }
+    };
+
+    agregar_historial(lugar=''){
+        if (this.historial.includes(lugar.toLocaleLowerCase())){
+            return;
+        }this.historial.unshift(lugar.toLocaleLowerCase());
+        
+    };
+
+    historial_capitalizado(){
+        this.historial.forEach((element, i) => {
+            const palabras=element.split(' ');
+            let palabras_capitalizadas='';
+            palabras.forEach(palabra=>{
+                palabras_capitalizadas=palabras_capitalizadas+' '+palabra.charAt(0).toUpperCase()+palabra.slice(1)
+            })
+            console.log(`${i + 1}. ${palabras_capitalizadas}`);
+        });
+    }
+
+    get lugates_buscado(){
+        return this.historial;
     }
 }
 

@@ -89,7 +89,7 @@ const listado_lugares = async (lugares = []) => {
         message: 'Seleccione',
         choices,
     }];
-    console.log(question);
+
     const {id} = await inquirer.prompt(question);
     return id;
 };
