@@ -28,18 +28,24 @@ Las tecnologias a utilizaren este proyecto son:
 ***
 ### Seccion 01
 Introducción del curso  
-### Seccion 02
-### Seccion 03
-### Seccion 04
-### Seccion 05
-### Seccion 06
+### Seccion 02 Fundamentos de Node
+Revisión basica de algunos Puntos claves de JavaScripts
+### Seccion 03 Reforzamiento de los temas necesarios
+Aspectos no tan basico de Javascripts necesarios para el curso
+### Seccion 04 Bases de Node
+Principios de como utilizar Node
+### Seccion 05 Aplicacion de Tareas
+Aplicación CLI que sirve para la gestión de Tareas, permitiendo un CRUD (Create, Read, Update, Delete),
+La aplicación almacena de manera persistentes las Tareas
+### Seccion 06 Aplicación de Tareas
 Aplicación CLI que obtiene como datos el nombre de una ciudad, despliega distintas alternativas que generan una coincidencia con la busqueda, para luego desplegar la
 informacion de dicha ciudad por pantalla.  
 La aplicación almacena de manera persistente las ultimas 5 busquedas realizadas.  
 Las APIs utilizadas fueron las siguientes:  
 [MAPBOX](https://www.mapbox.com/): Para obtener información de la ciudad.  
 [OPENWEATHER](https://openweathermap.org/): Para obtener información del clima.  
-
+### Seccion 07 Webserver - HTTP - EXPRESS
+Aplicacion desarrollada en un Web Server
   
   
 ## Certificado Finalización Curso
