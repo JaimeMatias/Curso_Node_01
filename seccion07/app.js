@@ -7,7 +7,10 @@ const port=8080;
 app.use(express.static('public')); //Middleware, se ejecuta antes que todo lo demas.
 
 app.get('/', (req, res) =>{
-    res.render('home');
+    res.render('home',{
+        nombre:'Matias Jaime',
+        titulo: 'Curso de Node',
+    });
 })
 
 app.get('/generic', (req, res) =>{
