@@ -3,6 +3,9 @@ const app = express()
 
 const port=8080
 
+//Servir contenido estático
+app.use(express.static('public')); //Middleware, se ejecuta antes que todo lo demas.
+
 app.get('/', (req, res) =>{
     res.send('Hola Mundo')
 })
@@ -13,7 +16,7 @@ app.get('/hola-mundo', (req, res) =>{
 
 
 app.get('*', (req, res) =>{
-    res.send('404 | Pagina No encontrada')
+    res.sendFile(__dirname + '/public/404.html')
 })
 
 app.listen(port, ()=>{
