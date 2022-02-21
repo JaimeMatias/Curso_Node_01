@@ -6,16 +6,20 @@ const port=8080
 //Servir contenido estático
 app.use(express.static('public')); //Middleware, se ejecuta antes que todo lo demas.
 
-app.get('/', (req, res) =>{
-    res.send('Hola Mundo')
+app.get('/index', (req, res) =>{
+    res.sendFile(__dirname + '/public/index.html')
 })
 
-app.get('/hola-mundo', (req, res) =>{
-    res.send('Hola Mundo desde  su respectiva pagina')
+app.get('/generic', (req, res) =>{
+    res.sendFile(__dirname + '/public/generic.html')
+})
+app.get('/elements', (req, res) =>{
+    res.sendFile(__dirname + '/public/elements.html')
 })
 
 
 app.get('*', (req, res) =>{
+    // Cuando la ruta a la que se quiere acceder es distinta al as definidas anterior mente, despliegua en el navegador la pagina 404.html
     res.sendFile(__dirname + '/public/404.html')
 })
 
