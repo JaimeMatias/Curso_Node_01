@@ -283,3 +283,23 @@ console.log(Direcciones[1])===== Norte
 console.log({Direcciones}====Direcciones={    1:'Norte',    2:'Sur',    3:'Este',    5:'oeste'}
 
 Su uso va a depender de que es lo que queramos mostrar
+
+
+-----------------------------------------------------------------------------------------------------------
+LEVANTAR WEB SERVER NODE
+const express = require('express');
+const app = express();
+const port=8081
+
+
+app.get('/', (req, res) =>{
+    res.write('Hola Mundo');
+    res.end();
+})
+
+
+app.listen(port, ()=>{
+    console.log(`Ejemplo corrienendo en: http://localhost: ${port}`)
+}
+
+)

@@ -52,6 +52,6 @@ La plataforma que se utilizó para el despliegue fue:
 ![HEROKU](/img/heroku.png) Heroku  
 El URL de la pagina es el siguiente:  
   https://curso-node-07-mj.herokuapp.com/
-  
+### Seccion 08 REST Server
 ## Certificado Finalización Curso
 * En progreso
