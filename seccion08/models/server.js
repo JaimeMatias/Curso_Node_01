@@ -4,7 +4,9 @@ require('dotenv').config();
 class server {
     constructor(){
         this.app=express();
+        //Middlewares
         this.middlewares();
+        //Rutas de mi aplicación
         this.routes();
         this.port=process.env.PORT;
 
@@ -16,14 +18,39 @@ class server {
     }
 
     routes(){
-        this.app.get('/', (req, res) =>{
-            res.send('Hello World');
-            // res.sendFile(+'./public/index.html',(err)=>{
-            //     console.log(err);
-            // })
+        this.app.get('/api', (req, res) =>{
+            res.json({
+                'msg':"Get API",
+            });
+                      
+        });
+        this.app.put('/api', (req, res) =>{
+            res.json({
+                'msg':"Put API",
+            });
+           
             
-        })
+        });
+        this.app.post('/api', (req, res) =>{
+            res.json({
+                'msg':"Post API",
+            });
+           
+            
+        });
+        this.app.delete('/api', (req, res) =>{
+            res.json({
+                'msg':"Delete API",
+            });
+            
+        });
         
+        this.app.patch('/api', (req, res) =>{
+            res.json({
+                'msg':"Patch API",
+            });
+            
+        });
     }
     listen(){
         this.app.listen(this.port, ()=>{
