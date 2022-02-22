@@ -1,5 +1,4 @@
 const axios = require('axios');
-const PasswordPrompt = require('inquirer/lib/prompts/password');
 
 class Busquedas {
     historial=[];

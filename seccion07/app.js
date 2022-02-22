@@ -1,7 +1,14 @@
+
 const express = require('express');
+const hbs=require('hbs');
 const app = express();
 app.set('view engine','hbs');
-const port=8080;
+
+require('dotenv').config();
+const port=process.env.PORT;
+
+//Handlebars
+hbs.registerPartials(__dirname + '/views/partials',(err)=>{console.log(err)});
 
 //Servir contenido estático
 app.use(express.static('public')); //Middleware, se ejecuta antes que todo lo demas.
@@ -14,10 +21,10 @@ app.get('/', (req, res) =>{
 })
 
 app.get('/generic', (req, res) =>{
-    res.sendFile(__dirname + '/public/generic.html')
+    res.render('generic');
 })
 app.get('/elements', (req, res) =>{
-    res.sendFile(__dirname + '/public/elements.html')
+   res.render('elements');
 })
 
 
