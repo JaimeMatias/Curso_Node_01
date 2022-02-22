@@ -46,7 +46,12 @@ Las APIs utilizadas fueron las siguientes:
 [OPENWEATHER](https://openweathermap.org/): Para obtener información del clima.  
 ### Seccion 07 Webserver - HTTP - EXPRESS
 Aplicacion desarrollada en un Web Server
-  
+La aplicación muchas funcionalidades no tiene, el principal propocitó es el de entender el paradigma de desarrollo de  Modelo-Vista-Controlador.  
+Ademas se buscaba aprender a desplegar la aplicaciónes en servidores cloud.
+La plataforma que se utilizó para el despliegue fue:  
+![HEROKU](/img/heroku.png) Heroku  
+El URL de la pagina es el siguiente:  
+  https://curso-node-07-mj.herokuapp.com/
   
 ## Certificado Finalización Curso
 * En progreso
