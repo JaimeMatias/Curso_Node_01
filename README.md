@@ -53,5 +53,11 @@ La plataforma que se utilizó para el despliegue fue:
 El URL de la pagina es el siguiente:  
   https://curso-node-07-mj.herokuapp.com/
 ### Seccion 08 REST Server
+Aplicacion desarrollada en un Web Server  
+Dicha 
+La plataforma que se utilizó para el despliegue fue:  
+![HEROKU](/img/heroku.png) Heroku  
+El URL de la pagina es el siguiente:  
+  https://curso-08-node-mj.herokuapp.com/
 ## Certificado Finalización Curso
 * En progreso
