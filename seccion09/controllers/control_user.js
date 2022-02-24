@@ -38,7 +38,7 @@ const usuarioPost = async (req = request, res = response) => {
     res.status(200).json({
         'msg': "Post API - ",
         usuario,
-        salt
+        
     });
 }
 
