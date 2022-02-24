@@ -1,5 +1,6 @@
 const { request, response } = require('express');
 const { status } = require('express/lib/response');
+const bcryptjs =require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 
@@ -14,18 +15,18 @@ const usuarioGet = (req, res = response) => {
 
 
 const usuarioPost = async (req = request, res = response) => {
-    const body = req.body;
-    const usuario = new Usuario(body);
-
+    const {nombre,correo,Password,rol} = req.body;
+    const salt=bcryptjs.genSaltSync();
+    
+    const usuario = new Usuario({nombre,correo,Password,rol});
+    usuario.Password=bcryptjs.hashSync(Password,salt);
     await usuario.save();
-
-
-
 
     console.log(usuario);
     res.status(200).json({
         'msg': "Post API - ",
-        usuario
+        usuario,
+        salt
     });
 }
 
