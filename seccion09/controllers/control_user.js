@@ -3,6 +3,7 @@ const bcryptjs =require('bcryptjs');
 const {validationResult}=require('express-validator');
 
 const Usuario = require('../models/usuario');
+const {validar_campos}=require('../middlewares/validar_campos')
 
 
 const usuarioGet = (req, res = response) => {
@@ -16,10 +17,7 @@ const usuarioGet = (req, res = response) => {
 
 
 const usuarioPost = async (req = request, res = response) => {
-    const errors=validationResult(req);
-    if (!errors.isEmpty()){
-        return res.status(400).json(errors)
-    };
+   
     const {nombre,correo,Password,rol} = req.body;
     const salt=bcryptjs.genSaltSync();
     
