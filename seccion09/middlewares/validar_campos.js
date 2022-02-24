@@ -2,6 +2,7 @@ const { request, response } = require('express');
 
 const {validationResult}=require('express-validator');
 
+
 const validar_campos=(req,res,next)=>{
     const errors=validationResult(req);
     if (!errors.isEmpty()){
@@ -11,6 +12,10 @@ const validar_campos=(req,res,next)=>{
     next();
 }
 
+
+
+
 module.exports={
     validar_campos,
+    
 }
