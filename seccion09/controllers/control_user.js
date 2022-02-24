@@ -18,14 +18,14 @@ const usuarioGet = (req, res = response) => {
 
 const usuarioPost = async (req = request, res = response) => {
    
-    const {nombre,correo,Password,rol} = req.body;
+    const {nombre,correo,edad,Password,rol} = req.body;
     const salt=bcryptjs.genSaltSync();
     
     //Verificar si el correo existe
 
     
     //Encriptar la contraseña:
-    const usuario = new Usuario({nombre,correo,Password,rol});
+    const usuario = new Usuario({nombre,correo,edad,Password,rol});
     usuario.Password=bcryptjs.hashSync(Password,salt);
     await usuario.save();
 
@@ -37,11 +37,18 @@ const usuarioPost = async (req = request, res = response) => {
     });
 }
 
-const usuariosPut = (req, res = response) => {
+const usuariosPut = async(req, res = response) => {
     const id = req.params.id_usuario;
+    const {_id,Password,google,correo,...resto}=req.body;
+
+    if (Password){
+        const salt=bcryptjs.genSaltSync();
+        resto.Password=bcryptjs.hashSync(Password,salt);
+    }
+    const usuario =await Usuario.findByIdAndUpdate(id,resto);
     res.status(200).json({
-        id,
         'msg': "Put API - Controlador",
+        usuario,
     });
 }
 const usuarioPatch = (req, res = response) => {
