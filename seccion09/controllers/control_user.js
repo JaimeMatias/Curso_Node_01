@@ -1,9 +1,11 @@
-const { response } = require('express');
+const { request, response } = require('express');
+const { status } = require('express/lib/response');
 
+const Usuario = require('../models/usuario');
 
 
 const usuarioGet = (req, res = response) => {
-    const {nombre}=req.query;
+    const { nombre } = req.query;
     res.status(200).json({
         nombre,
         'msg': "Get API - Controlador",
@@ -11,17 +13,24 @@ const usuarioGet = (req, res = response) => {
 }
 
 
-const usuarioPost = (req, res = response) => {
-    const body=req.body;
-    
+const usuarioPost = async (req = request, res = response) => {
+    const body = req.body;
+    const usuario = new Usuario(body);
+
+    await usuario.save();
+
+
+
+
+    console.log(usuario);
     res.status(200).json({
-        'msg': "Post API - Controlador",
-        body,
+        'msg': "Post API - ",
+        usuario
     });
 }
 
 const usuariosPut = (req, res = response) => {
-    const id=req.params.id_usuario;
+    const id = req.params.id_usuario;
     res.status(200).json({
         id,
         'msg': "Put API - Controlador",

@@ -4,33 +4,33 @@ const UsuarioSchema = Schema({
         type: String,
         require: [true, 'El nombre es obligatorio']
     },
-    correo:{
+    correo: {
         type: String,
         require: [true, 'El correo es obligatorio'],
-        unique:true,
+        unique: true,
     },
-    Password:{
+    Password: {
         type: String,
-        require: [true, 'La contraseña es obligatorio'],  
+        require: [true, 'La contraseña es obligatorio'],
     },
-    img:{
-        type:String
+    img: {
+        type: String
     },
-    rol:{
-        type:String,
-        required:true,
-        emun:['ADMIN_ROLE','USER_ROLE' ],
+    rol: {
+        type: String,
+        required: true,
+        emun: ['ADMIN_ROLE', 'USER_ROLE'],
     },
-    estado:{
-        type:Boolean,
-default:true,
-        
+    estado: {
+        type: Boolean,
+        default: true,
+
     },
-    google:{
-        type:Boolean,
-        default:false
+    google: {
+        type: Boolean,
+        default: false
     }
 
 });
 
-module.exports = model('Usuario',UsuarioSchema);
+module.exports = model('Usuario', UsuarioSchema);
