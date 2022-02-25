@@ -9,5 +9,7 @@
 /seccion07/node_modules
 /SECCION08/node_modules
 /seccion09/node_modules
+/seccion10/node_modules
 /seccion09/.env
+/seccion10/.env
 .gitignore
