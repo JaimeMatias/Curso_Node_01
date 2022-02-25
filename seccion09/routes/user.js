@@ -5,11 +5,14 @@ const router = Router();
 
 const { usuarioGet, usuarioPost, usuarioPatch, usuariosDelete, usuariosPut } = require('../controllers/control_user');
 const { validar_campos,} = require('../middlewares/validar_campos');
-const {rol_valido,comprobar_email}=require('../helper/db_validators')
+const {rol_valido,rol_valido_put,comprobar_email,existe_id}=require('../helper/db_validators')
 
 router.get('/', usuarioGet);
 router.put('/:id_usuario',[
-
+check('id_usuario','No es in ID valid').isMongoId(),
+check('id_usuario').custom(existe_id),
+check('rol').custom(rol_valido_put),
+validar_campos,
 ], usuariosPut);
 router.post('/', [
     check('correo', 'El correo no es válido').isEmail(),
