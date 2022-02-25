@@ -48,7 +48,7 @@ const usuarioPost = async (req = request, res = response) => {
     });
 }
 
-//----------------POST-----------------------------
+//----------------PUT-----------------------------
 const usuariosPut = async (req, res = response) => {
     const id = req.params.id_usuario;
     const { _id, Password, google, correo, ...resto } = req.body;
@@ -62,15 +62,22 @@ const usuariosPut = async (req, res = response) => {
 }
 
 
-
+//----------------PATCH-----------------------------
 const usuarioPatch = (req, res = response) => {
     res.status(200).json({
         'msg': "Patch API - Controlador",
     });
 }
 
-const usuariosDelete = (req, res = response) => {
+//----------------DELETE-----------------------------
+const usuariosDelete = async (req, res = response) => {
+    const id = req.params.id_usuario;
+    const { _id, Password, google, correo, ...resto } = req.body;
+    //const usuario=await Usuario.findByIdAndDelete(id); //Borrado Fisico de la base de Datos
+    const usuario =await Usuario.findByIdAndUpdate(id,{estado:false}); //Borrado Logico de la base de Datos
     res.status(200).json({
+        id,
+        usuario,
         'msg': "Delete API - Controlador",
     });
 }
