@@ -13,3 +13,5 @@
 /seccion09/.env
 /seccion10/.env
 .gitignore
+/unsplash/.env
+/unsplash/node_modules
