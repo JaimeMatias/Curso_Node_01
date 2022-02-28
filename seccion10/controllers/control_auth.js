@@ -33,7 +33,8 @@ const login =async(req=request,res=response)=>{
             }
             const token=await generarjwt(usuario.id);
             res.json({
-                msg:'Login Exitoso!!!!'
+                msg:'Login Exitoso!!!!',
+                token
               
             })
         }
