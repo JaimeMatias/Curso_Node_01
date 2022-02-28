@@ -2,7 +2,7 @@ const { request, response } = require('express');
 const bcryptjs = require('bcryptjs');
 
 const Usuario =require('../models/usuario');
-
+const {generarjwt}=require('../helper/generar_jwt');
 
 const login =async(req=request,res=response)=>{
     const {correo,Password}=req.body;
@@ -24,21 +24,22 @@ const login =async(req=request,res=response)=>{
             };
 
             const valid_password= bcryptjs.compareSync(Password,usuario.Password);
+            console.log(valid_password);
             if(!valid_password){
                 return res.status(400).json({
-                    msg:'Contraseña Incorrecta'
+                    msg:'Contraseña Incorrecta',
+                    valid_password
                 })
             }
+            const token=await generarjwt(usuario.id);
+            res.json({
+                usuario,
+                token,
+            })
         }
         
 
-        res.json({
-            msg:'login ok',
-            correo,
-            Password,
-
-           
-        })
+        
 
     } catch (error) {
         console.log(error);
