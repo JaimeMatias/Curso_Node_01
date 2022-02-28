@@ -12,18 +12,17 @@ const validarJWT = async (req = request, res = response, next) => {
         
     }
     try {
-        const {id_usuario}=req.params;
+       
         const {uid}=jwt.verify(token,process.env.SECRETORPRIVATEKEY);
-        if(id_usuario !=uid){
-            throw 'El token pertenece a otro usuario'
-        };
-        const usuario=await Usuario.findById(uid);
+        const usuario_administrador= await Usuario.findById(uid)
 
-        req.body_autenticado=usuario
+        
+       
+        req.body_autenticado=usuario_administrador;
         
         next()
     } catch (error) {
-        
+        console.log(error);
         res.status(401).json({
             msg:error
         })    

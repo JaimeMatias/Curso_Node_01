@@ -31,12 +31,17 @@ const comprobar_email = async (correo = '') => {
 };
 const existe_id = async (id) => {
 
-    const existe_usuario = await Usuario.findById(id);
-    if (!existe_usuario) {
-        throw new Error(`No corresponde a un ID valido`)
+    try {
+        const existe_usuario = await Usuario.findById(id);
+       
+        if (!existe_usuario) {
+            throw new Error(`No corresponde a un ID valido`)
+        }
+
+    } catch (error) {
+      
+
     }
-
-
 };
 
 module.exports = {
