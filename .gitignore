@@ -15,3 +15,4 @@
 .gitignore
 /unsplash/.env
 /unsplash/node_modules
+/unsplash-js-javascript/node_modules

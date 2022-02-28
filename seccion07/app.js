@@ -36,5 +36,4 @@ app.get('*', (req, res) =>{
 app.listen(port, ()=>{
     console.log(`Ejemplo corrienendo en: http://localhost: ${port}`)
 }
-
 )
