@@ -24,7 +24,7 @@ const login =async(req=request,res=response)=>{
             };
 
             const valid_password= bcryptjs.compareSync(Password,usuario.Password);
-            console.log(valid_password);
+            
             if(!valid_password){
                 return res.status(400).json({
                     msg:'Contraseña Incorrecta',
@@ -33,8 +33,8 @@ const login =async(req=request,res=response)=>{
             }
             const token=await generarjwt(usuario.id);
             res.json({
-                usuario,
-                token,
+                msg:'Login Exitoso!!!!'
+              
             })
         }
         

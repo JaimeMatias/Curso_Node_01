@@ -8,7 +8,8 @@ const { validar_campos, } = require('../middlewares/validar_campos');
 const { rol_valido, rol_valido_put, comprobar_email, existe_id } = require('../helper/db_validators')
 
 router.get('/', usuarioGet);
-router.put('/:id_usuario', [
+router.put('/:id_usuario'// id_usuario es el nombre con el defino la variable _id de la base de  Datos
+ ,[
     check('id_usuario', 'No es in ID valid').isMongoId(),
     check('id_usuario').custom(existe_id),
     check('rol').custom(rol_valido_put),
