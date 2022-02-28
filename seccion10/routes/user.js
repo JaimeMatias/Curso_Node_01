@@ -4,10 +4,10 @@ const router = Router();
 
 
 const { usuarioGet, usuarioPost, usuarioPatch, usuariosDelete, usuariosPut } = require('../controllers/control_user');
-const { validar_campos, } = require('../middlewares/validar_campos');
-const {validarJWT}=require('../middlewares/validar_jwt');
-const {admin_rol,tiene_role}=require('../middlewares/validar_roles');
-
+// const { validar_campos, } = require('../middlewares/validar_campos');
+// const {validarJWT}=require('../middlewares/validar_jwt');
+// const {tiene_role}=require('../middlewares/validar_roles');
+const {validar_campos,validarJWT,tiene_role}=require('../middlewares');
 const { rol_valido, rol_valido_put, comprobar_email, existe_id } = require('../helper/db_validators')
 
 router.get('/', usuarioGet);
