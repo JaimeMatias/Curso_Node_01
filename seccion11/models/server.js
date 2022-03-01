@@ -7,8 +7,13 @@ const {db_connection}=require('../database/config')
 class server {
     constructor() {
         this.app = express();
-        this.usuario_path='/api/usuarios';
-        this.auth_path='/api/auth';
+        //Las rutas en la pagina web
+        this.paths={
+            auth:'/api/auth',
+            categoria:'/api/categoria',
+            usuarios:'/api/usuarios',
+        }
+
         //Conectar a base de Datos
         this.conectarDB()
 
@@ -34,8 +39,10 @@ class server {
     }
 
     routes() {
-        this.app.use(this.auth_path,require('../routes/auth'));
-        this.app.use(this.usuario_path,require('../routes/user'));
+        //A donde consultar cuando se accede a cada ruta en la pagina web
+        this.app.use(this.paths.auth,require('../routes/auth'));
+        this.app.use(this.paths.usuarios,require('../routes/user'));
+        this.app.use(this.paths.categoria,require('../routes/categorias'));
     }
     listen() {
         this.app.listen(this.port, () => {

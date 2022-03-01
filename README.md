@@ -58,6 +58,8 @@ Dicha pagina está pensada para aprender los conceptos basicos de la utilizació
 La plataforma que se utilizó para el despliegue fue:  
 ![HEROKU](/img/heroku.png) Heroku  
 El URL de la pagina es el siguiente:  
-  https://curso-08-node-mj.herokuapp.com/
+  https://curso-08-node-mj.herokuapp.com/  
+La documentación de las APIs es el siguiente:
+ https://documenter.getpostman.com/view/19429018/UVksLEDn#21ec7ef3-99ff-46b2-b996-34b936dcd063
 ## Certificado Finalización Curso
 * En progreso
