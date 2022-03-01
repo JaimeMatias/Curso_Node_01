@@ -52,9 +52,9 @@ La plataforma que se utilizó para el despliegue fue:
 ![HEROKU](/img/heroku.png) Heroku  
 El URL de la pagina es el siguiente:  
   https://curso-node-07-mj.herokuapp.com/
-### Seccion 08 REST Server
+### Seccion 08-10 REST Server
 Aplicacion desarrollada en un Web Server  
-Dicha 
+Dicha pagina está pensada para aprender los conceptos basicos de la utilización de APIS, así como la interactuación con bases de Datos.  
 La plataforma que se utilizó para el despliegue fue:  
 ![HEROKU](/img/heroku.png) Heroku  
 El URL de la pagina es el siguiente:  
