@@ -34,7 +34,12 @@ const UsuarioSchema = Schema({
     google: {
         type: Boolean,
         default: false
-    }
+    },
+    categoria:[
+        {   type: Schema.Types.ObjectId,
+            ref: 'Usuario',
+        }
+    ]
 
 });
 
