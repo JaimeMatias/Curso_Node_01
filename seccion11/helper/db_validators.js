@@ -3,6 +3,7 @@ const { response, request } = require('express');
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Categoria = require('../models/categoria')
+const Producto=require('../models/producto')
 const rol_valido = async (rol = '') => {
     const existerol = await Role.findOne({ rol });
     if (!existerol) {
@@ -49,7 +50,7 @@ const comprobar_categoria_id = async (id) => {
 
     try {
         const existe_categoria = await Categoria.findById(id);
-   
+
         if (!existe_categoria) {
             throw new Error
         }
@@ -61,33 +62,46 @@ const comprobar_categoria_id = async (id) => {
 };
 
 const comprobar_existencia_nombre = async (campo) => {
-    
-    const nombre=campo.toUpperCase();
-  
+
+    const nombre = campo.toUpperCase();
+
     //Si el nombre del objeto es dintinto al nombre del atribut que busca, el findOne crashea,
     //Si busco por nombre, debe existir el atributo nombre en la colección
-    const existe_nombre = await Categoria.findOne({nombre});
-    if (existe_nombre){
+    const existe_nombre = await Categoria.findOne({ nombre });
+    if (existe_nombre) {
         throw new Error(`La categoria ${campo.toUpperCase()} ya fue creada`);
     }
 };
 
-const comprobar_usuario_administrado=async(req=request,res=response,next)=>{
-const {estado,rol}=req.body_autenticado;
+const comprobar_usuario_administrado = async (req = request, res = response, next) => {
+    const { estado, rol } = req.body_autenticado;
 
-if(rol=='ADMIN_ROLE'){
-if(!estado){
-    res.status(401).json({
-        msg:'Usuarios Deshabilitado'
-    })    
-}else{next()}
-}else{
-    res.status(401).json({
-        msg:'Usuarios sin los permisos adecuados'
-    })    
-}
+    if (rol == 'ADMIN_ROLE') {
+        if (!estado) {
+            res.status(401).json({
+                msg: 'Usuarios Deshabilitado'
+            })
+        } else { next() }
+    } else {
+        res.status(401).json({
+            msg: 'Usuarios sin los permisos adecuados'
+        })
+    }
 }
 
+/*
+METODOS MODDELO PRODUCTO
+*/
+
+const comprobar_existencia_nombre_producto = async (campo) => {
+    const nombre = campo.toUpperCase();
+    const existe_nombre = await Producto.findOne({ nombre });
+  
+    if (existe_nombre) {
+        throw new Error(`El producto ${campo.toUpperCase()} ya está en la DB`);
+    }
+
+}
 
 module.exports = {
     rol_valido,
@@ -96,5 +110,6 @@ module.exports = {
     existe_id,
     comprobar_categoria_id,
     comprobar_existencia_nombre,
-    comprobar_usuario_administrado
+    comprobar_usuario_administrado,
+    comprobar_existencia_nombre_producto
 }

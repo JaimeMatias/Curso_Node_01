@@ -11,12 +11,6 @@ const ProductoSchema = Schema({
         required: [true,'El Estado es obligatorio']
         
     },
-    estado: {
-        type: Boolean,
-        default:true,
-        required: [true,'El Estado es obligatorio']
-        
-    },
     usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
@@ -41,4 +35,12 @@ const ProductoSchema = Schema({
 
 });
 
+ProductoSchema.methods.toJSON=function() {
+    
+    const {_id,__v,estado,...resto}=this.toObject();
+    const uid=_id;
+    const producto={uid,...resto};
+    
+    return producto;
+}
 module.exports = model('Producto', ProductoSchema);
