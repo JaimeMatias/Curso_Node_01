@@ -23,41 +23,34 @@ const crear_categoria = async (req = request, res = response) => {
 
     const cat = await Categoria.findOne({ nombre })
 
-    if (cat) {
-        return res.status(400).json({
+    const id = req.body_autenticado._id
+    const arreglo_cat = req.body_autenticado.categoria
 
-            msg: `La categoria: ${cat.nombre} ya existe en la base de datos`
-        })
-    } else {
-        const id = req.body_autenticado._id
-        const arreglo_cat=req.body_autenticado.categoria
-
-        const data_categoria = {
-            nombre,
-            usuario: id
-        }
-
-        const categoria_new = new Categoria(data_categoria);
-        const cat_id = categoria_new._id
-        //Guardar Categoria en Base de DATOSDB
-        await categoria_new.save()
-        
-        if (arreglo_cat.length == 0) {
-            const resto = { categoria: cat_id }
-
-            await Usuario.findByIdAndUpdate(id, resto);
-        } else {
-            arreglo_cat.push(cat_id);            
-            const resto = { categoria:arreglo_cat };
-            await Usuario.findByIdAndUpdate(id, resto);
-        }
-
-     
-        res.status(201).json({
-            msg: 'Categoria Creada',
-            data_categoria,
-        })
+    const data_categoria = {
+        nombre,
+        usuario: id
     }
+
+    const categoria_new = new Categoria(data_categoria);
+    const cat_id = categoria_new._id
+    //Guardar Categoria en Base de DATOSDB
+    await categoria_new.save()
+
+    if (arreglo_cat.length == 0) {
+        const resto = { categoria: cat_id }
+
+        await Usuario.findByIdAndUpdate(id, resto);
+    } else {
+        arreglo_cat.push(cat_id);
+        const resto = { categoria: arreglo_cat };
+        await Usuario.findByIdAndUpdate(id, resto);
+    }
+
+
+    res.status(201).json({
+        msg: 'Categoria Creada',
+        data_categoria,
+    })
 };
 const listar_categoria = async (req = request, res = response) => {
     const { limite, desde } = req.query;
@@ -65,11 +58,7 @@ const listar_categoria = async (req = request, res = response) => {
     const cat = await Categoria.find({ estado: true })
         .limit(limite)
         .skip(desde)
-    //     .populate('usuario')
-    //     .exec(function(err,Categoria){
-    //         if (err) return handleError(err);
-    //         console.log('El Usuario es %s',Categoria.usuario)
-    //     })        ;
+        .populate('usuario')
 
 
     res.status(201).json({
@@ -85,13 +74,32 @@ const listar_categoria_especifica = async (req = request, res = response) => {
     const { id } = req.params;
 
     const cate = await Categoria.findById(id).populate('usuario');
-    
-  
+
     res.status(201).json({
-    
         msg: 'Categoria',
         cate,
+    })
+}
 
+const actualizar_categoria = async (req = request, res = response) => {
+    const nombre = req.body.nombre.toUpperCase()
+    const { id } = req.params;
+
+    //Para poder actualizar un atributo de una colección, este atributo debe estár definido en el modelo, sinó no va a generar ningun cambio
+    await Categoria.findByIdAndUpdate(id, { nombre })
+    res.status(201).json({
+        msg: 'Categoria Actualizadas',
+        nombre,
+        id,
+    })
+}
+
+const eliminar_categoria= async (req=request,res=response)=>{
+    const { id } = req.params;
+
+   await Categoria.findByIdAndUpdate(id, { estado:false })
+    res.status(201).json({
+        msg: 'Categoria Eliminada',
 
     })
 }
@@ -99,5 +107,7 @@ const listar_categoria_especifica = async (req = request, res = response) => {
 module.exports = {
     crear_categoria,
     listar_categoria,
-    listar_categoria_especifica
+    listar_categoria_especifica,
+    actualizar_categoria,
+    eliminar_categoria
 }

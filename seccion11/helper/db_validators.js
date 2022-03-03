@@ -1,3 +1,5 @@
+const { response, request } = require('express');
+
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Categoria = require('../models/categoria')
@@ -33,33 +35,66 @@ const existe_id = async (id) => {
 
     try {
         const existe_usuario = await Usuario.findById(id);
-
         if (!existe_usuario) {
             throw new Error(`No corresponde a un ID valido`)
         }
 
     } catch (error) {
-        throw new Error(error)
+        throw new Error(`No corresponde a un ID valido`)
 
     }
 };
 
 const comprobar_categoria_id = async (id) => {
-    
-    console.log('El id utilizado es:',id);
-      //console.log('La categoria',existe_categoria)
 
+    try {
         const existe_categoria = await Categoria.findById(id);
-        console.log(existe_categoria)
-        if (!existe_categoria) {
-            throw new Error(`No corresponde a un ID valido`)}
    
+        if (!existe_categoria) {
+            throw new Error
+        }
+
+    } catch (error) {
+        throw new Error(`No corresponde a un valor valido`)
+
+    }
 };
+
+const comprobar_existencia_nombre = async (campo) => {
+    
+    const nombre=campo.toUpperCase();
+  
+    //Si el nombre del objeto es dintinto al nombre del atribut que busca, el findOne crashea,
+    //Si busco por nombre, debe existir el atributo nombre en la colección
+    const existe_nombre = await Categoria.findOne({nombre});
+    if (existe_nombre){
+        throw new Error(`La categoria ${campo.toUpperCase()} ya fue creada`);
+    }
+};
+
+const comprobar_usuario_administrado=async(req=request,res=response,next)=>{
+const {estado,rol}=req.body_autenticado;
+
+if(rol=='ADMIN_ROLE'){
+if(!estado){
+    res.status(401).json({
+        msg:'Usuarios Deshabilitado'
+    })    
+}else{next()}
+}else{
+    res.status(401).json({
+        msg:'Usuarios sin los permisos adecuados'
+    })    
+}
+}
+
 
 module.exports = {
     rol_valido,
     rol_valido_put,
     comprobar_email,
     existe_id,
-    comprobar_categoria_id
+    comprobar_categoria_id,
+    comprobar_existencia_nombre,
+    comprobar_usuario_administrado
 }
