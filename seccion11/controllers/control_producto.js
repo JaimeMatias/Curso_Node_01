@@ -18,9 +18,11 @@ const listar_productos = async (req = request, res = response) => {
 };
 
 const listar_producto_id = async (req = request, res = response) => {
+    const {id}=req.params;
+    const producto = await Producto.findById(id).populate('usuario','nombre').populate('categoria','nombre');
     res.status(201).json({
         msg: 'Listar Producto',
-
+        producto
     })
 };
 

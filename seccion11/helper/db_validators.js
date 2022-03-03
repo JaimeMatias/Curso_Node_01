@@ -100,8 +100,16 @@ const comprobar_existencia_nombre_producto = async (campo) => {
     if (existe_nombre) {
         throw new Error(`El producto ${campo.toUpperCase()} ya está en la DB`);
     }
-
 }
+
+const comprobar_existencia_id_producto = async (id) => {
+    const existe_nombre = await Producto.findById(id)
+  
+    if (!existe_nombre) {
+        throw new Error(`El id del producto ingresa no existe en la DB`);
+    }
+}
+
 
 module.exports = {
     rol_valido,
@@ -111,5 +119,6 @@ module.exports = {
     comprobar_categoria_id,
     comprobar_existencia_nombre,
     comprobar_usuario_administrado,
-    comprobar_existencia_nombre_producto
+    comprobar_existencia_nombre_producto,
+    comprobar_existencia_id_producto
 }

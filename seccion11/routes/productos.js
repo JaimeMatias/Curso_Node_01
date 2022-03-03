@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { listar_producto_id, listar_productos, actualizar_producto, eliminar_producto, crear_productos } = require('../controllers/control_producto')
 const { validar_campos, validarJWT } = require('../middlewares');
-const { comprobar_existencia_nombre, comprobar_existencia_nombre_producto } = require('../helper/db_validators');
+const { comprobar_existencia_nombre, comprobar_existencia_nombre_producto,comprobar_existencia_id_producto } = require('../helper/db_validators');
 const { check } = require('express-validator');
 const router = Router();
 //Obtener todas las categorias - Publico
@@ -12,6 +12,8 @@ router.get('/', [
 
 //Obtener una categoria por id - Publico
 router.get('/:id', [
+    check('id','El id provisto no pertenece a ningun Producto').isMongoId(),
+    check('id').custom(comprobar_existencia_id_producto),
     validar_campos
 ], listar_producto_id
 );
