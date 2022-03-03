@@ -58,12 +58,11 @@ const listar_categoria = async (req = request, res = response) => {
     const cat = await Categoria.find({ estado: true })
         .limit(limite)
         .skip(desde)
-        .populate('usuario')
+        .populate('usuario','nombre') //Uso el Populate para traer los datos del usuario, y con el segundo atributo 'nombre', indico que es ese el unico campo que deseo ver
 
 
     res.status(201).json({
         msg: 'Categorias',
-
         cat,
 
     })
@@ -73,7 +72,7 @@ const listar_categoria = async (req = request, res = response) => {
 const listar_categoria_especifica = async (req = request, res = response) => {
     const { id } = req.params;
 
-    const cate = await Categoria.findById(id).populate('usuario');
+    const cate = await Categoria.findById(id).populate('usuario','nombre');
 
     res.status(201).json({
         msg: 'Categoria',
@@ -83,13 +82,15 @@ const listar_categoria_especifica = async (req = request, res = response) => {
 
 const actualizar_categoria = async (req = request, res = response) => {
     const nombre = req.body.nombre.toUpperCase()
+    const usuario=req.body_autenticado._id;
     const { id } = req.params;
 
     //Para poder actualizar un atributo de una colección, este atributo debe estár definido en el modelo, sinó no va a generar ningun cambio
-    await Categoria.findByIdAndUpdate(id, { nombre })
+    await Categoria.findByIdAndUpdate(id,{nombre,usuario,new:true})
     res.status(201).json({
         msg: 'Categoria Actualizadas',
         nombre,
+  
         id,
     })
 }

@@ -12,6 +12,7 @@ class server {
             auth:'/api/auth',
             categoria:'/api/categoria',
             usuarios:'/api/usuarios',
+            productos:'/api/productos'
         }
 
         //Conectar a base de Datos
@@ -43,6 +44,7 @@ class server {
         this.app.use(this.paths.auth,require('../routes/auth'));
         this.app.use(this.paths.usuarios,require('../routes/user'));
         this.app.use(this.paths.categoria,require('../routes/categorias'));
+        this.app.use(this.paths.productos,require('../routes/productos'));
     }
     listen() {
         this.app.listen(this.port, () => {
