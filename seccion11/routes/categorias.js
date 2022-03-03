@@ -6,7 +6,7 @@ const { validar_campos, validarJWT } = require('../middlewares');
 const {comprobar_categoria_id,comprobar_existencia_nombre,comprobar_usuario_administrado}=require('../helper/db_validators')
 const { crear_categoria, listar_categoria,listar_categoria_especifica,actualizar_categoria,eliminar_categoria } = require('../controllers/control_categoria');
 
-const {Categoria}=require('../models/categoria')
+
 // router.post('/login',[
 //     check('correo', 'El correo no es válido').isEmail(),
 //     //check('correo').custom(comprobar_email),//Le paso el parametro correo
