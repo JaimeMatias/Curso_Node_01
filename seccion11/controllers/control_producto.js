@@ -1,13 +1,15 @@
 const { response, request } = require("express");
-const { Producto, Categoria } = require('../models')
+const { Producto, Categoria, Usuario } = require('../models');
+const usuario = require("../models/usuario");
+const { all } = require("../routes/auth");
 
 const listar_productos = async (req = request, res = response) => {
-    const{limite,desde}=req.query;
-    const producto = await Producto.find({estado:true})
-    .limit(limite)
-    .skip(desde)
-    .populate('usuario','nombre')
-    .populate('categoria','nombre');
+    const { limite, desde } = req.query;
+    const producto = await Producto.find({ estado: true })
+        .limit(limite)
+        .skip(desde)
+        .populate('usuario', 'nombre')
+        .populate('categoria', 'nombre');
     res.status(201).json({
         msg: 'Listar Productos',
         limite,
@@ -18,8 +20,8 @@ const listar_productos = async (req = request, res = response) => {
 };
 
 const listar_producto_id = async (req = request, res = response) => {
-    const {id}=req.params;
-    const producto = await Producto.findById(id).populate('usuario','nombre').populate('categoria','nombre');
+    const { id } = req.params;
+    const producto = await Producto.findById(id).populate('usuario', 'nombre').populate('categoria', 'nombre');
     res.status(201).json({
         msg: 'Listar Producto',
         producto
@@ -43,7 +45,7 @@ const crear_productos = async (req = request, res = response) => {
     }
 
     const producto_new = new Producto(data_producto);
-        //Guardar Categoria en Base de DATOSDB
+    //Guardar Categoria en Base de DATOSDB
     await producto_new.save()
     res.status(201).json({
         msg: 'Producto Creado',
@@ -54,8 +56,23 @@ const crear_productos = async (req = request, res = response) => {
 };
 
 const actualizar_producto = async (req = request, res = response) => {
+    const { nombre, categoria, precio, descripcion, disponible } = req.body
+    const { id } = req.params
+    const id_usuario = req.body_autenticado.id
+    const bloque = { nombre:nombre.toUpperCase(),usuario: id_usuario, precio, descripcion, disponible }
+    if(categoria!=null){
+        const categoriaM = await Categoria.findOne({ nombre: categoria.toUpperCase() });
+        
+        bloque['categoria']=categoriaM._id
+    }
+    
+    await Producto.findByIdAndUpdate(id, bloque)
+
     res.status(201).json({
         msg: 'Producto Actualizado',
+      
+        bloque,
+
 
     })
 };
