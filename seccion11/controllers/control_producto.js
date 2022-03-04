@@ -59,18 +59,18 @@ const actualizar_producto = async (req = request, res = response) => {
     const { nombre, categoria, precio, descripcion, disponible } = req.body
     const { id } = req.params
     const id_usuario = req.body_autenticado.id
-    const bloque = { nombre:nombre.toUpperCase(),usuario: id_usuario, precio, descripcion, disponible }
-    if(categoria!=null){
+    const bloque = { nombre: nombre.toUpperCase(), usuario: id_usuario, precio, descripcion, disponible }
+    if (categoria != null) {
         const categoriaM = await Categoria.findOne({ nombre: categoria.toUpperCase() });
-        
-        bloque['categoria']=categoriaM._id
+
+        bloque['categoria'] = categoriaM._id
     }
-    
+
     await Producto.findByIdAndUpdate(id, bloque)
 
     res.status(201).json({
         msg: 'Producto Actualizado',
-      
+
         bloque,
 
 
@@ -79,8 +79,11 @@ const actualizar_producto = async (req = request, res = response) => {
 
 
 const eliminar_producto = async (req = request, res = response) => {
+    const { id } = req.params;
+
+    await Producto.findByIdAndUpdate(id, { estado: false })
     res.status(201).json({
-        msg: 'Productos Eliminado',
+        msg: 'Producto eliminado ExitosaMENTE',
 
     })
 };

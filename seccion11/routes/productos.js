@@ -43,6 +43,8 @@ router.put('/:id', [
 //Borrar una categoria -privado- Admin
 router.delete('/:id', [
     validarJWT,
+    check('id','El id provisto no pertenece a ningun Producto').isMongoId(),
+    check('id').custom(comprobar_existencia_id_producto),
     comprobar_usuario_administrado,
     validar_campos
 ], eliminar_producto
