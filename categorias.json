@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "621eb0f52973bb64e382a8e0"
+  },
+  "nombre": "CARNE",
+  "estado": true,
+  "usuario": {
+    "$oid": "62181d9b272e9326b4d0a6cf"
+  },
+  "__v": 0,
+  "new": false
+},{
+  "_id": {
+    "$oid": "621ffe085975760f9fe6201f"
+  },
+  "nombre": "GALLETA",
+  "estado": true,
+  "usuario": {
+    "$oid": "62181d9b272e9326b4d0a6cf"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6220070a063fd02a6c1374b0"
+  },
+  "nombre": "GALLETA1",
+  "estado": true,
+  "usuario": {
+    "$oid": "62181d9b272e9326b4d0a6cf"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "62200957e99c9167fb9f93f7"
+  },
+  "nombre": "GALLETA2",
+  "estado": true,
+  "usuario": {
+    "$oid": "62181d9b272e9326b4d0a6cf"
+  },
+  "__v": 0
+}]

@@ -13,13 +13,25 @@ const buscar_usuario = async (termino = '', res = response) => {
     if (esMongoID) {
         const usuario = await Usuario.findById(termino);
         res.json({
-            results:(usuario)?[usuario]:[]
+            results: (usuario) ? [usuario] : []
         }
-            
+
         )
-    }else{  res.status(400).json({
-        msg:'Elemento no encontrado'
-    })}
+    }
+
+    const regex = new RegExp(termino, 'i');
+
+    const usuarios = await Usuario.find(
+        //Condicionales en una busqueda Mongoose
+        {
+            $or: [{nombre:regex},{correo:regex}],
+            $and:[{estado:true}]
+        }
+    );
+    res.json({
+        results: usuarios
+    })
+
 }
 
 
@@ -34,7 +46,7 @@ const buscar = (req, res) => {
 
     switch (coleccion) {
         case 'usuarios':
-            buscar_usuario(termino,res);
+            buscar_usuario(termino, res);
 
             break;
         case 'categoria':
