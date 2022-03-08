@@ -11,9 +11,11 @@
 /seccion09/node_modules
 /seccion10/node_modules
 /seccion11/node_modules
+/seccion12/node_modules
 /seccion09/.env
 /seccion10/.env
 /seccion11/.env
+/seccion12/.env
 .gitignore
 /unsplash/.env
 /unsplash/node_modules
