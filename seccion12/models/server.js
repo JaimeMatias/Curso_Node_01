@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fileUpload =require('express-fileupload');
 require('dotenv').config();
 
 const {db_connection}=require('../database/config')
@@ -31,7 +32,7 @@ class server {
     async conectarDB(){
         await db_connection();
     }
-    middlewares() {
+    middlewares() {//Todos los middlewares usan la palabra reservada use
         // CORS
         this.app.use(cors());
 
@@ -40,6 +41,14 @@ class server {
 
         //Directorio Publico
         this.app.use(express.static('public'));
+
+        //Fileupload
+        this.app.use(
+            fileUpload({
+                useTempFiles:true,
+                temFileDir:'/tmp/'
+            })
+        )
     }
 
     routes() {
