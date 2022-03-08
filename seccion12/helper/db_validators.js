@@ -110,6 +110,13 @@ const comprobar_existencia_id_producto = async (id) => {
     }
 }
 
+const coleccionesPermitidas=async(coleccion='',colecciones=[])=>{
+    const incluida=colecciones.includes(coleccion);
+    if(!incluida){
+        throw new Error(`La coleccion ${coleccion} no es permitida`)
+    }
+    return true;
+}
 
 module.exports = {
     rol_valido,
@@ -120,5 +127,6 @@ module.exports = {
     comprobar_existencia_nombre,
     comprobar_usuario_administrado,
     comprobar_existencia_nombre_producto,
-    comprobar_existencia_id_producto
+    comprobar_existencia_id_producto,
+    coleccionesPermitidas
 }
