@@ -17,6 +17,7 @@
 /seccion11/.env
 /seccion12/.env
 /seccion12/tmp
+/seccion12/uploads
 .gitignore
 /unsplash/.env
 /unsplash/node_modules
