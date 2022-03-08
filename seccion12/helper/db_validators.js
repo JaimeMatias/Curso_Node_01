@@ -3,7 +3,7 @@ const { response, request } = require('express');
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
 const Categoria = require('../models/categoria')
-const Producto=require('../models/producto')
+const Producto = require('../models/producto')
 const rol_valido = async (rol = '') => {
     const existerol = await Role.findOne({ rol });
     if (!existerol) {
@@ -96,7 +96,7 @@ METODOS MODDELO PRODUCTO
 const comprobar_existencia_nombre_producto = async (campo) => {
     const nombre = campo.toUpperCase();
     const existe_nombre = await Producto.findOne({ nombre });
-  
+
     if (existe_nombre) {
         throw new Error(`El producto ${campo.toUpperCase()} ya está en la DB`);
     }
@@ -104,18 +104,33 @@ const comprobar_existencia_nombre_producto = async (campo) => {
 
 const comprobar_existencia_id_producto = async (id) => {
     const existe_nombre = await Producto.findById(id)
-  
+
     if (!existe_nombre) {
         throw new Error(`El id del producto ingresa no existe en la DB`);
     }
 }
 
-const coleccionesPermitidas=async(coleccion='',colecciones=[])=>{
-    const incluida=colecciones.includes(coleccion);
-    if(!incluida){
+const coleccionesPermitidas = async (coleccion = '', colecciones = []) => {
+    const incluida = colecciones.includes(coleccion);
+    if (!incluida) {
         throw new Error(`La coleccion ${coleccion} no es permitida`)
     }
     return true;
+}
+
+
+
+
+const comprobar_archivo = async (req = request, res = response, next) => {
+    const { files } = req
+    if (!files) {
+        res.status(501).json({
+            msg: 'No se ingresó ningun archivo',
+            
+        })
+    }
+
+next()
 }
 
 module.exports = {
@@ -128,5 +143,6 @@ module.exports = {
     comprobar_usuario_administrado,
     comprobar_existencia_nombre_producto,
     comprobar_existencia_id_producto,
-    coleccionesPermitidas
+    coleccionesPermitidas,
+    comprobar_archivo
 }
