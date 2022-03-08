@@ -10,7 +10,7 @@ const subir_archivo = async (files, extensionesValidas = ['png', 'jpg', 'jpeg', 
 
 
         if (!extensionesValidas.includes(extension)) {
-            return reject(`La extesnión ${extension} no es permitida`)
+            return reject(`La extesnión ${extension} no es permitida, solo ${extensionesValidas}`)
         }
 
         const nombreTemp = uuidv4() + '.' + extension;

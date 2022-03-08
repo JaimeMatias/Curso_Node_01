@@ -11,9 +11,15 @@ const cargar_archivo = async (req, res) => {
         res.status(400).json({ msg: 'No files were uploaded.' });
         return;
     }
-
-const patCompleto=await subir_archivo(req.files);
+try {
+    const patCompleto=await subir_archivo(req.files,undefined,carpeta='imagenes');
 res.json({patCompleto})
+
+} catch (error) {
+    res.status(400).json({
+        error
+    })
+}
 
 }
 
