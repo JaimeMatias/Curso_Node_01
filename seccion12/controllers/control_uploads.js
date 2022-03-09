@@ -68,6 +68,25 @@ const actualizar_imagen = async (req, res) => {
 
 
 
+const cargar_archivo_cloudinary = async (req, res) => {
+
+
+    if (!req.files.archivo || !req.files || Object.keys(req.files).length === 0) {
+        res.status(400).json({ msg: 'No files were uploaded.' });
+        return;
+    }
+    try {
+        const patCompleto = await subir_archivo(req.files, undefined, carpeta = 'imagenes');
+        res.json({ patCompleto })
+
+    } catch (error) {
+        res.status(400).json({
+            error
+        })
+    }
+}
+
+
 const actualizar_imagen_cloudinary = async (req, res) => {
 
     const { id, coleccion } = req.params;
@@ -150,6 +169,7 @@ module.exports = {
     cargar_archivo,
     actualizar_imagen,
     mostrar_imagen,
-    actualizar_imagen_cloudinary
+    actualizar_imagen_cloudinary,
+    cargar_archivo_cloudinary
 
 }

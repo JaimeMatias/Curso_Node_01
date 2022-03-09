@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 const router = Router();
 
 const { validar_campos } = require('../middlewares/validar_campos');
-const {cargar_archivo,actualizar_imagen,actualizar_imagen_cloudinary,mostrar_imagen}=require('../controllers/control_uploads');
+const {cargar_archivo,cargar_archivo_cloudinary,actualizar_imagen,actualizar_imagen_cloudinary,mostrar_imagen}=require('../controllers/control_uploads');
 const {coleccionesPermitidas}=require('../helper/db_validators');
 const {comprobar_archivo } = require('../helper/db_validators');
 router.post('/',[
