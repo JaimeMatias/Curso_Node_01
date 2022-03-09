@@ -96,15 +96,19 @@ const actualizar_imagen_cloudinary = async (req, res) => {
     }
     //Limpiar imagenes anteriores
     if (modelo.img) {
+        const nombreArr=modelo.img.split('/');
+        const nombre=nombreArr[nombreArr.length-1];
+        const [public_id]=nombre.split('.');
+        console.log(public_id)
+        cloudinary.uploader.destroy(public_id);
     }
     const { tempFilePath } = req.files.archivo
 
     const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
-    //modelo.img = nombre;
-    // await modelo.save();
+    modelo.img = secure_url;
+    await modelo.save();
     return res.json({
         modelo,
-        secure_url
     });
 }
 
