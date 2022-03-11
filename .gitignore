@@ -13,12 +13,15 @@
 /seccion11/node_modules
 /seccion12/node_modules
 /seccion13/node_modules
+/seccion15/node_modules
+
 
 /seccion09/.env
 /seccion10/.env
 /seccion11/.env
 /seccion12/.env
 /seccion13/.env
+/seccion15/seccion13/.env
 /seccion12/tmp
 /seccion12/uploads
 .gitignore
