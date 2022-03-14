@@ -1,7 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const {socket_controller}=require('../sockets/controller')
+const { db_connection } = require('../databaseConnection/config')
+
+const { socket_controller } = require('../sockets/controller')
 class server {
     constructor() {
         this.app = express();
@@ -14,6 +16,9 @@ class server {
 
         }
 
+        //Conectar a base de Datos
+        this.conectarDB()
+
         //Middlewares
         this.middlewares();
         //Rutas de mi aplicación
@@ -23,6 +28,14 @@ class server {
         //Sockets
         this.sockets()
 
+    }
+    
+  /*
+  FUNCIONES DE LA CLASE
+  */  
+    async conectarDB() {
+        //Función que sirve para conectarnos a la base de datos Sockets
+        await db_connection();
     }
     middlewares() {//Todos los middlewares usan la palabra reservada use
         // CORS
@@ -34,6 +47,7 @@ class server {
 
     }
 
+
     routes() {
         //A donde consultar cuando se accede a cada ruta en la pagina web
     }
@@ -44,7 +58,7 @@ class server {
     }
 
     sockets() {
-        this.io.on('connection',socket_controller)
+        this.io.on('connection', socket_controller)
     }
 }
 
