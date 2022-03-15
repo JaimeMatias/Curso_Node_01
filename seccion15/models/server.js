@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const { db_connection } = require('../databaseConnection/config')
 
-const { socket_controller } = require('../sockets/controller')
+const { socket_controller } =require('../sockets/controller')
 class server {
     constructor() {
         this.app = express();
@@ -11,9 +11,7 @@ class server {
 
         this.server = require('http').createServer(this.app);
         this.io = require('socket.io')(this.server);
-
         this.paths = {
-
         }
 
         //Conectar a base de Datos
@@ -51,6 +49,7 @@ class server {
     routes() {
         //A donde consultar cuando se accede a cada ruta en la pagina web
     }
+    
     listen() {
         this.server.listen(this.port, () => {
             console.log(`Ejemplo corrienendo en: http://localhost: ${this.port}`)

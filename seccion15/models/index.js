@@ -7,5 +7,6 @@ module.exports={
     Server,
     TicketControl,
     DBTicketControl,
-    DBTicket
-}
+    DBTicket,
+
+};
