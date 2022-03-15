@@ -1,3 +1,4 @@
+const TicketControl =require('../models/ticket-control');
 const socket_controller=(socket) => {
        
         socket.on('enviar-mensaje', (payload,callback) => {
@@ -6,6 +7,14 @@ const socket_controller=(socket) => {
             socket.broadcast.emit('enviar-mensaje',payload)
         })
 }
+const inicializar_ticket =async()=>{
+    setTimeout( ()=>{
+        const ticketControl = new TicketControl(); 
+     },3000
+     );
+     
+}
+inicializar_ticket()
 
 module.exports={
     socket_controller
