@@ -1,26 +1,24 @@
-const TicketControl =require('../models/ticket-control');
-const socket_controller=(socket) => {
-       
-        socket.on('enviar-mensaje', (payload,callback) => {
-            const id=12345;
-            callback(id);
-            socket.broadcast.emit('enviar-mensaje',payload)
-        })
-}
-const inicializar_ticket =async()=>{
-    
-        const ticketControl = new TicketControl(); 
-        setTimeout( ()=>{
-            ticketControl.siguiente();
-        },3000
-        );
-       
-    
-     
-     
-}
-inicializar_ticket()
+const TicketControl = require('../models/ticket-control');
+const ticketControl = new TicketControl();
 
-module.exports={
+
+const socket_controller = async(socket) => {
+
+    socket.on('siguiente-ticket', async(payload, callback) => {
+        const siguiente =await ticketControl.siguiente()
+
+
+       
+            console.log(`El valor de siguiente: ${siguiente}`)
+       
+            callback(siguiente);
+       
+       
+
+
+    })
+}
+
+module.exports = {
     socket_controller
 }

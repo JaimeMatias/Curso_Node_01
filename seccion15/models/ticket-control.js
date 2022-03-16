@@ -1,5 +1,6 @@
 const DBTicketControl = require('./db_ticket_control');
-const Ticket =require('./ticket');
+const DBTicket = require('./db_ticket');
+const Ticket = require('./ticket');
 
 
 
@@ -26,8 +27,9 @@ class TicketControl {
     }
     async init() {
 
-        console.log('Clase Controlador inicializada');
+
         const db_ticket_control = await DBTicketControl.findById(this._id);
+        console.log(`Clase Controlador inicializada ${db_ticket_control}`);
         //console.log(db_ticket_control)
         const { hoy, tickets, ultimo, ultimos4 } = db_ticket_control;
 
@@ -52,29 +54,34 @@ class TicketControl {
         console.log(`Cambios guardados base Datos `)
     };
     siguiente = async () => {
-
         this.ultimo += 1;
         const ticket = new Ticket(this.ultimo, null);
         const { _id, numero } = ticket;
         this.tickets.push(_id);
         await this.guardarDB();
-        return `Ticket: ${numero}`;
+        const salida = `Ticket: ${numero}`
+        console.log(salida)
+        return(salida);
     };
-    atenderTicket(escritorio) {
+    atenderTicket = async (datos) => {
         if (this.tickets.length === 0) {
             return null;
         }
+        console.log(datos)
         //atiendo el primer elemento de la lista
         const ticket = this.tickets[0];
+        console.log(ticket)
+        const ticket_db = DBTicket.findById(ticket)
+
         this.tickets.shift();//saco el primer elemento de la lista
-        //ticket.escritorio=escritorio;
-        //this.ultimos4.unshift(ticket),//añado en la primer posición de mi arreglo el ticket
-        //if(this.ultimos4.length>4){
-        //    this.ultimos4.splice(-1,1);
-        //}
-        //this.guardarDB();
+        await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos })
+        this.ultimos4.unshift(ticket);//añado en la primer posición de mi arreglo el ticket
+        if (this.ultimos4.length > 4) {
+            this.ultimos4.splice(-1, 1);
+        }
+        await this.guardarDB();
         return ticket
     };
 }
 
-module.exports =TicketControl;// Las clases no se exportan entre corchetes
+module.exports = TicketControl;// Las clases no se exportan entre corchetes
