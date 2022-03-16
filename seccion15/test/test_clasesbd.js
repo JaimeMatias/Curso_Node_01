@@ -1,34 +1,26 @@
-const {DBTicket,DBTicketControl}=require('../models');
+const DBTicketControl=require('../models/db_ticket_control');//Si lo pongo entre cochetes se rompe
 const mongoose =require('mongoose');
-const {MongoClient}=require('mongodb');
 require('dotenv').config();
-const cors = require('cors');
-
 const uri="mongodb+srv://Node_User_Cafe:M9MxbGzjPTSZl5ry12as@miclustercafe.immqo.mongodb.net/Sockets"
 main =async()=>{
 
-console.log(uri)
+
 try {
     await db_connection();
       const tickets={
         nombre:"Ticket 1",
-        hoy:new Date()
+        hoy:new Date().getDate(),
+        ultimo:4
     };
+    console.log(tickets)
     const tickets_new = new DBTicketControl(tickets);
     await tickets_new.save()
-   
-    const prueba1= await DBTicketControl.findById(_id="622aad30870e8fa30ce9d463");
     console.log(tickets_new)
+    const prueba1= await DBTicketControl.findById(_id="622f2c115ee17497be6d2078");
+    console.log(prueba1)
 } catch (error) {
 console.log(error)    
 }
-
-//Sentencia para crear un nuevo objeto en la base de datos
-
-
-
-//Sentencia para guardarlo en la base de datos
-
 
 }
 

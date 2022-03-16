@@ -1,8 +1,9 @@
 const {Schema,model}=require('mongoose')
 const DBTicket=Schema({
-nombre:String,
- numero:Number,
 
+numero:Number,
+escritorio:String,
+completado:Boolean,
 })
 
 module.exports=model('DBTicket', DBTicket) //De esta manera renombro el Schema

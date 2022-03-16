@@ -8,10 +8,15 @@ const socket_controller=(socket) => {
         })
 }
 const inicializar_ticket =async()=>{
-    setTimeout( ()=>{
+    
         const ticketControl = new TicketControl(); 
-     },3000
-     );
+        setTimeout( ()=>{
+            ticketControl.siguiente();
+        },3000
+        );
+       
+    
+     
      
 }
 inicializar_ticket()
