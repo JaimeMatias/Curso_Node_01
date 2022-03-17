@@ -8,9 +8,8 @@ class server {
     constructor() {
         this.app = express();
         //Las rutas en la pagina web
-
         this.server = require('http').createServer(this.app);
-        this.io = require('socket.io')(this.server);
+        this.io = require('socket.io')(this.server); //Llama a los packetes del socket
         this.paths = {
         }
 
@@ -57,6 +56,8 @@ class server {
     }
 
     sockets() {
+        //Conecta la el controlador del socket con la interfaz grafica
+
         this.io.on('connection', socket_controller)
     }
 }

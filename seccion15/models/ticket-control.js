@@ -53,16 +53,17 @@ class TicketControl {
         await DBTicketControl.findByIdAndUpdate(this._id, dbticketcontrol)
         console.log(`Cambios guardados base Datos `)
     };
+    
     siguiente = async () => {
         this.ultimo += 1;
         const ticket = new Ticket(this.ultimo, null);
-        const { _id, numero } = ticket;
+        const { _id} = ticket;
         this.tickets.push(_id);
         await this.guardarDB();
-        const salida = `Ticket: ${numero}`
-        console.log(salida)
-        return(salida);
+        
+        return(ticket);
     };
+
     atenderTicket = async (datos) => {
         if (this.tickets.length === 0) {
             return null;
@@ -71,16 +72,16 @@ class TicketControl {
         //atiendo el primer elemento de la lista
         const ticket = this.tickets[0];
         console.log(ticket)
-        const ticket_db = DBTicket.findById(ticket)
-
         this.tickets.shift();//saco el primer elemento de la lista
-        await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos })
+      
+        const dbticket=await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos },{new:true})
+      
         this.ultimos4.unshift(ticket);//añado en la primer posición de mi arreglo el ticket
         if (this.ultimos4.length > 4) {
             this.ultimos4.splice(-1, 1);
         }
         await this.guardarDB();
-        return ticket
+        return dbticket
     };
 }
 

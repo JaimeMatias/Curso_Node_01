@@ -10,7 +10,7 @@ try {
       const tickets={
         nombre:"Ticket 1",
         hoy:new Date().getDate(),
-        ultimo:4
+        ultimo:0
     };
     console.log(tickets)
     const tickets_new = new DBTicketControl(tickets);
