@@ -66,15 +66,15 @@ class TicketControl {
 
     atenderTicket = async (datos) => {
         if (this.tickets.length === 0) {
+            
             return null;
         }
-        console.log(datos)
         //atiendo el primer elemento de la lista
         const ticket = this.tickets[0];
-        console.log(ticket)
+
         this.tickets.shift();//saco el primer elemento de la lista
       
-        const dbticket=await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos },{new:true})
+        const dbticket=await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos },{new:true}) //Actualizo la base de datos
       
         this.ultimos4.unshift(ticket);//añado en la primer posición de mi arreglo el ticket
         if (this.ultimos4.length > 4) {

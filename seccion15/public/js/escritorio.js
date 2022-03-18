@@ -4,6 +4,8 @@ const socket = io();
 const searchParams = new URLSearchParams(window.location.search);//trae el contenido de la pagina web
 const lblEscritorio=document.querySelector('#lblEscritorio');
 const btnAtender=document.querySelector('button');
+const lblTicketNumero=document.querySelector('#lblTicketNumero');
+const divAlerta=document.querySelector('.alert');
 
 if (!searchParams.has('escritorio')) {
     window.location = 'index.html';
@@ -12,6 +14,7 @@ if (!searchParams.has('escritorio')) {
 }
 
 const escritorio= searchParams.get('escritorio');
+divAlerta.style.display='none';
 
 //Asigna el valor a una etiqueta
 lblEscritorio.innerText=`${escritorio}`
@@ -39,7 +42,22 @@ socket.on('disconnect', () => {
 
 
  // Generad  evento desde la pagina web
- //btnCrear.addEventListener( 'click', () => {
+ btnAtender.addEventListener( 'click', () => {
+
+    //Emitir un mensaje al backend
+    socket.emit('atender-ticket',{escritorio},({status,ticket_atendido})=>{ //Escritorio es el valor que se envia al bacj y Ticket es el callback de la función atender-tickets
+
+ if(!status){
+    lblTicketNumero.innerText=`NADIE`;
+     return divAlerta.style.display='';
+ }
+console.log(ticket_atendido);
+
+const {numero}=ticket_atendido;
+        lblTicketNumero.innerText=`${numero}`;
+    })
+
+ });
  //socket.emit( 'siguiente-ticket', null, ( ticket ) => {
 //         console.log('Desde el server', ticket );
         
