@@ -20,6 +20,7 @@ socket.on('disconnect', () => {
 });
 // Recibir un evento de la pagina web
 socket.on('ultimo-ticket',(ultimo) => {
+    //Asigna el valor a una etiqueta
     lblNuevoTicket.innerText=`Ticket N° ${ultimo}`
     console.log('respuesta: ',ultimo);
     //btnCrear.disabled=true;
