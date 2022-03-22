@@ -5,6 +5,7 @@ const searchParams = new URLSearchParams(window.location.search);//trae el conte
 const lblEscritorio=document.querySelector('#lblEscritorio');
 const btnAtender=document.querySelector('button');
 const lblTicketNumero=document.querySelector('#lblTicketNumero');
+const lblTicketPendientes=document.querySelector('#lblPendientes');
 const divAlerta=document.querySelector('.alert');
 
 if (!searchParams.has('escritorio')) {
@@ -32,38 +33,23 @@ socket.on('disconnect', () => {
     btnAtender.disabled=true;
     
 });
-// Recibir un evento de la pagina web
- socket.on('ultimo-ticket',(ultimo) => {})
-//     lblNuevoTicket.innerText=`Ticket N° ${ultimo}`
-//     console.log('respuesta: ',ultimo);
-//     //btnCrear.disabled=true;
-    
-// });
 
 
  // Generad  evento desde la pagina web
  btnAtender.addEventListener( 'click', () => {
 
     //Emitir un mensaje al backend
-    socket.emit('atender-ticket',{escritorio},({status,ticket_atendido})=>{ //Escritorio es el valor que se envia al bacj y Ticket es el callback de la función atender-tickets
-
+    socket.emit('atender-ticket',{escritorio},({status,dbticket,cantTickets})=>{ //Escritorio es el valor que se envia al back y
+        //Los 3 valores que recibo son lo que me devuelve el back, 
+        // Para que funcione tiene que tener el mimos nombre, porque estoy mandando un objeto en el back y tienen que coincidir los nombre
  if(!status){
     lblTicketNumero.innerText=`NADIE`;
      return divAlerta.style.display='';
  }
-console.log(ticket_atendido);
 
-const {numero}=ticket_atendido;
-        lblTicketNumero.innerText=`${numero}`;
+const{numero}=dbticket;
+lblTicketNumero.innerText=`${numero}`;
+        lblTicketPendientes.innerText=`${cantTickets}`;
     })
 
  });
- //socket.emit( 'siguiente-ticket', null, ( ticket ) => {
-//         console.log('Desde el server', ticket );
-        
-//         const{numero}=ticket;
-//         console.log('Valor: ',numero)
-//         lblNuevoTicket.innerText=`Ticket N° ${numero}`
-//     });
-
-// });

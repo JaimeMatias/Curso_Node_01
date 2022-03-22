@@ -12,6 +12,7 @@ class TicketControl {
         this.hoy = new Date().getDate() //Obtengo la fecha
         this.tickets = [];//Para que esto funcione en este campo se debe almacenar el UID de la base de datos de tickets
         this.ultimos4 = []; //Para que esto funcione en este campo se debe almacenar el UID de la base de datos de tickets
+        this.ultimos4data=[];//Se va a almacenar la información de los ultimos 4 tickets
         this._id = "622feff95ab291211725f710";
         this.init();
     }
@@ -53,36 +54,41 @@ class TicketControl {
         await DBTicketControl.findByIdAndUpdate(this._id, dbticketcontrol)
         console.log(`Cambios guardados base Datos `)
     };
-    
+
     siguiente = async () => {
         this.ultimo += 1;
         const ticket = new Ticket(this.ultimo, null);
-        const { _id} = ticket;
+        const { _id } = ticket;
         this.tickets.push(_id);
         await this.guardarDB();
-        
-        return(ticket);
+
+        return (ticket);
     };
 
     atenderTicket = async (datos) => {
         if (this.tickets.length === 0) {
-            
+
             return null;
         }
         //atiendo el primer elemento de la lista
         const ticket = this.tickets[0];
 
         this.tickets.shift();//saco el primer elemento de la lista
-      
-        const dbticket=await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos },{new:true}) //Actualizo la base de datos
-      
+        const cantTickets=this.tickets.length;
+        const dbticket = await DBTicket.findByIdAndUpdate(ticket, { escritorio: datos }, { new: true }) //Actualizo la base de datos
+
         this.ultimos4.unshift(ticket);//añado en la primer posición de mi arreglo el ticket
+        this.ultimos4data.unshift(dbticket);
+        //console.log('Ultimos 4 Data:',this.ultimos4data)
         if (this.ultimos4.length > 4) {
             this.ultimos4.splice(-1, 1);
+            this.ultimos4data.splice(-1,1);
         }
         await this.guardarDB();
-        return dbticket
+        return {dbticket,cantTickets}
     };
+
+
 }
 
 module.exports = TicketControl;// Las clases no se exportan entre corchetes
