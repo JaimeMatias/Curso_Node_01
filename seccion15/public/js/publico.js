@@ -18,9 +18,8 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
     console.log('Desconectado del servidor');
     // btnCrear.disabled=true;
-
-
 });
+
 
 socket.on('estado-actual', (payload) => {
     const [ticket1, ticket2, ticket3, ticket4] = payload;
