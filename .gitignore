@@ -14,7 +14,8 @@
 /seccion12/node_modules
 /seccion13/node_modules
 /seccion15/node_modules
-
+/seccion15/node_modules
+/seccion16/node_modules
 
 /seccion09/.env
 /seccion10/.env
@@ -22,6 +23,7 @@
 /seccion12/.env
 /seccion13/.env
 /seccion15/.env
+/seccion16/.env
 /seccion12/tmp
 /seccion12/uploads
 .gitignore
