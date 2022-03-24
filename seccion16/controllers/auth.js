@@ -9,10 +9,11 @@ const { googleVerify } = require('../helpers/google-verify');
 
 const login = async (req, res = response) => {
 
-    const { correo, password } = req.body;
+   
+    console.log('Ingresa')
 
     try {
-
+        const { correo, password } = req.body;
         // Verificar si el email existe
         const usuario = await Usuario.findOne({ correo });
         if (!usuario) {
@@ -113,10 +114,15 @@ const googleSignin = async (req, res = response) => {
 
 
 }
-
+const renovarToken =async(req, res) => {
+    const { usuario } = req;
+    const token =  await generarJWT(usuario.id);
+    res.json({ usuario, token })
+}
 
 
 module.exports = {
     login,
-    googleSignin
+    googleSignin,
+    renovarToken
 }

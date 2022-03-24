@@ -14,7 +14,7 @@ miFormulario.addEventListener('submit',ev=>{
             formData[el.name]=el.value
             }        
     };
-    console.log(formData )
+    console.log(JSON.stringify(formData) )
     fetch(url+'login',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -27,7 +27,7 @@ miFormulario.addEventListener('submit',ev=>{
         }
         localStorage.setItem('token',token);
     })
-    .catch(err=>{console.log('el valor del error:',err)})
+    .catch(err=>{console.log('Genera error')})
 
 })
 function onSignIn(googleUser) {
