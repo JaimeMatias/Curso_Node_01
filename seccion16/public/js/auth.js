@@ -26,6 +26,7 @@ miFormulario.addEventListener('submit',ev=>{
             return console.error(msg);
         }
         localStorage.setItem('token',token);
+        window.location='chat.html'
     })
     .catch(err=>{console.log('Genera error')})
 
@@ -50,7 +51,8 @@ function onSignIn(googleUser) {
         .then(resp => resp.json())
         .then(({ token }) => {
             console.log('Valor de Token:',token);
-            localStorage.setItem('token',token); //Almaceno el valor del token en el localSotra para tenerlo a mano
+            localStorage.setItem('token',token); //Almaceno el valor del token en el localSotra para tenerlo a mano.
+            window.location='chat.html'
         })
         .catch(console.log);
 

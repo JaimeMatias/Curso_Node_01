@@ -19,7 +19,18 @@ const validarJWT =async()=>{
     const {usuario:userDB,token:TokenDB}=await resp.json()
     console.log(userDB,TokenDB)
     localStorage.setItem('token',TokenDB);
-    usuario=userDB
+    usuario=userDB;
+    document.title=usuario.nombre;
+
+    await conectarSocket();
+}
+
+const conectarSocket =async()=>{
+    const socket =io({
+        'extraHeaders':{
+            'x-token':localStorage.getItem('token')
+        }
+    });
 }
 
 const main=async()=>{
