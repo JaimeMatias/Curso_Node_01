@@ -50,15 +50,30 @@ const conectarSocket = async () => {
 
     });
     
-    socket.on('usuarios-activos',()=>{
-
+    socket.on('usuarios-activos',(payload)=>{
+        dibujarUsuarios(payload)
     });
     
     socket.on('mensaje-privado',()=>{
-
     });
-}
+};
 
+const dibujarUsuarios =(usuario=[])=>{
+    console.log(usuario)
+    let usersHtml='';
+    usuario.forEach(({nombre,uid})=>{
+        usersHtml+=`
+        <li>
+        <p>
+        <h5 class="text-success">${nombre}</h5>
+        <span class="fs-6 text-muted">${uid}</span>
+        </p>
+        </li>
+        `
+    });
+    ulUsuarios.innerHTML=usersHtml;
+
+};
 const main = async () => {
     await validarJWT();
 }

@@ -28,10 +28,12 @@ class ChatMensajes {
 
     conectarUsuario(usuario){
         this.usuarios[usuario.id]=usuario
+        
     };
     descoectarUsuario(id){
-        delete this.usuario[id]
+        delete this.usuarios[id];
+        
     }
 }
 
-module.exports=ChatMensajes
+module.exports=ChatMensajes;
