@@ -38,31 +38,31 @@ const conectarSocket = async () => {
         }
     });
 
-    socket.on('connect',()=>{
+    socket.on('connect', () => {
         console.log('Sockets Online')
     });
 
-    socket.on('disconnect',()=>{
+    socket.on('disconnect', () => {
         console.log('Sockets Offline')
     });
 
-    socket.on('recibir-mensajes',()=>{
-
+    socket.on('recibir-mensajes', (payload) => {
+        console.log(payload)
     });
-    
-    socket.on('usuarios-activos',(payload)=>{
+
+    socket.on('usuarios-activos', (payload) => {
         dibujarUsuarios(payload)
     });
-    
-    socket.on('mensaje-privado',()=>{
+
+    socket.on('mensaje-privado', () => {
     });
 };
 
-const dibujarUsuarios =(usuario=[])=>{
+const dibujarUsuarios = (usuario = []) => {
     console.log(usuario)
-    let usersHtml='';
-    usuario.forEach(({nombre,uid})=>{
-        usersHtml+=`
+    let usersHtml = '';
+    usuario.forEach(({ nombre, uid }) => {
+        usersHtml += `
         <li>
         <p>
         <h5 class="text-success">${nombre}</h5>
@@ -71,9 +71,22 @@ const dibujarUsuarios =(usuario=[])=>{
         </li>
         `
     });
-    ulUsuarios.innerHTML=usersHtml;
+    ulUsuarios.innerHTML = usersHtml;
 
 };
+
+
+txtMensaje.addEventListener('keyup', ({ keyCode }) => {
+    const mensaje = txtMensaje.value;
+    const uid = txtUid.value;
+
+    if (keyCode !== 13) { return; }
+    if (mensaje.length === 0) { return; }
+    console.log(mensaje)
+    socket.emit('enviar-mensaje', { uid,mensaje })
+}
+
+)
 const main = async () => {
     await validarJWT();
 }

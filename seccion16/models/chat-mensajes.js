@@ -13,17 +13,19 @@ class ChatMensajes {
         this.usuarios = {};
     };
     get ultimos10() {
-        this.mensajes = this.mensajes.splice(0, 10);
-        return this.mensajes;
+        this.ChatMensajes = this.ChatMensajes.splice(0, 10);
+        return this.ChatMensajes;
     };
     get usuariosArr() {
         return Object.values(this.usuarios);//Devuelve la colección como un arreglo
     };
 
     enviarMensaje(uid, nombre, mensaje) {
-        this.mensajes.unshift(
+        console.log("Datos en enviarMensaje:",uid, nombre, mensaje)
+        this.ChatMensajes.unshift(
             new Mensaje(uid, nombre, mensaje)
         )
+        console.log('this mensajes:', this.ChatMensajes)
     };
 
     conectarUsuario(usuario){

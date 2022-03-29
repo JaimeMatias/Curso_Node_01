@@ -18,6 +18,12 @@ socket.on('disconnect',()=>{
     chatMensajes.descoectarUsuario(usuario._id)
     io.emit('usuarios-activos',chatMensajes.usuariosArr)
 })
+socket.on('enviar-mensaje',({mensaje,uid})=>{
+    console.log(usuario.id,usuario.nombre,mensaje)
+    chatMensajes.enviarMensaje(usuario.id,usuario.nombre,mensaje);
+    io.emit('recibir-mensajes',chatMensajes.ultimos10)
+})
 };
+
 
 module.exports={socketController}
