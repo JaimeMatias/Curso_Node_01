@@ -12,6 +12,10 @@ console.log('Se conecto',usuario.nombre);
 
 chatMensajes.conectarUsuario(usuario);
 io.emit('usuarios-activos',chatMensajes.usuariosArr)
+socket.emit('recibir-mensajes',chatMensajes.ultimos10)
+
+//Conectar a una sala especial
+socket.join(usuario.id);
 
 socket.on('disconnect',()=>{
     //console.log('El valor del id: ',usuario._id)
@@ -19,9 +23,16 @@ socket.on('disconnect',()=>{
     io.emit('usuarios-activos',chatMensajes.usuariosArr)
 })
 socket.on('enviar-mensaje',({mensaje,uid})=>{
-    console.log(usuario.id,usuario.nombre,mensaje)
-    chatMensajes.enviarMensaje(usuario.id,usuario.nombre,mensaje);
-    io.emit('recibir-mensajes',chatMensajes.ultimos10)
+    if (uid)
+    { // Mensaje Privado
+        console.log('Mensaje Privado')
+        socket.to(uid).emit('mensaje-privado',{de:usuario.nombre,mensaje})
+    }else {
+        chatMensajes.enviarMensaje(usuario.id,usuario.nombre,mensaje);
+        io.emit('recibir-mensajes',chatMensajes.ultimos10)
+    }
+ 
+    
 })
 };
 

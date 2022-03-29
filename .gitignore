@@ -30,3 +30,5 @@
 /unsplash/.env
 /unsplash/node_modules
 /unsplash-js-javascript/node_modules
+/Training_CSV/node_modules
+/Training_CSV/.env
