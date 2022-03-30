@@ -14,10 +14,10 @@ export const GetUsuario = (req: Request, res: Response) => {
 };
 
 export const PostUsuario = (req: Request, res: Response) => {
-    const { body } = req.params;
+    const { body } = req;
     res.json({
         msg: 'postUsuario',
-        body
+        body,
     })
 };
 
