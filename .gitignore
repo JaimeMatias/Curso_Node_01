@@ -17,6 +17,7 @@
 /seccion15/node_modules
 /seccion16/node_modules
 /seccion17/node_modules
+/seccion18/node_modules
 /seccion17/Dist
 
 /seccion09/.env
@@ -26,6 +27,7 @@
 /seccion13/.env
 /seccion15/.env
 /seccion16/.env
+/seccion17/.env
 /seccion17/.env
 /seccion12/tmp
 /seccion12/uploads
